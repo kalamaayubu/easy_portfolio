@@ -20,7 +20,7 @@ const NavBar = () => {
               className="h-14 w-auto"
               priority
             />
-            <span className="text-blue-400 hidden sm:flex">Easy Portfolio</span>
+            <span className="text-gray-800">Easy Portfolio</span>
           </div>
           {/* Mobile navigation menu */}
           <button
@@ -46,7 +46,7 @@ const NavBar = () => {
           {/* Desktop navigation menu */}
           <nav className="gap-4 px-4 hidden md:flex">
             <Link
-              href="/template_test"
+              href="/"
               id="home"
               className="hover:text-blue-500 active:scale-95"
             >
@@ -108,7 +108,7 @@ const NavBar = () => {
           </button>
           <nav className="md:hidden bg-white z-50 flex flex-col w-3/4 m-auto top-20 bottom-0 left-0 right-0 rounded-lg">
             <Link
-              href="/template_test"
+              href="/"
               id="home"
               className="hover:text-blue-500 active:scale-95 px-4 py-3 hover:bg-gray-100"
             >

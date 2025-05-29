@@ -2,7 +2,7 @@ import NavBar from "@/components/sectionTemplates/navBar/NavBar"
 
 const TemplateTestPage = () => {
   return (
-    <div>
+    <div className="min-h-screen">
         <NavBar/>
     </div>
   )

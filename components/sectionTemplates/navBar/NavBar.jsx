@@ -86,7 +86,7 @@ const NavBar = () => {
 
       {/* Mobile navigation bar */}
       {isOpen && (
-        <div className="absolute top-0 left-0 right-0 bottom-0 bg-gray-950 bg-opacity-90 z-30 flex items-center justify-center md:hidden transition-all duration-300 ease-in-out">
+        <div className="absolute top-0 left-0 right-0 bottom-0 bg-gray-950 bg-opacity-90 z-30 flex items-center justify-center md:hidden transition-all duration-300 ease-in-7">
           <button
             onClick={() => setIsOpen(false)}
             className="absolute top-4 right-4 p-2 rounded-md bg-gray-100 hover:bg-gray-200 active:scale-90"

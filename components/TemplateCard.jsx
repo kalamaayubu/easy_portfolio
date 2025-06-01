@@ -1,9 +1,21 @@
+"use client";
+
 import { ArrowRight, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-const TemplateCard = () => {
+const TemplateCard = ({ templateData }) => {
+  const router = useRouter();
+  const { id, name, thumbnail } = templateData;
+
+  const handleSeeDetails = () => {
+    router.push(`/templates/${id}`);
+    // Optionally, you can also scroll to the top of the page
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 rounded-xl relative w-56 h-60 group hover:-translate-y-2 transition-all duration-300 ease-in-out shadow-lg">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 bg-green-700 p-4 rounded-xl relative w-56 h-60 group hover:-translate-y-2 transition-all duration-300 ease-in-out shadow-lg">
       <div className="h-60 w-56 relative overflow-hidden rounded-xl">
         <Image
           src={"/assets/chooseCloudMessaging.png"}
@@ -14,7 +26,7 @@ const TemplateCard = () => {
         />
       </div>
       <button className="absolute z-50 top-24 left-10 bg-red-50 bg-opacity-100 text-black gap-2 opacity-0 flex group-hover:opacity-100 group/button">
-        <span>See details</span>
+        <span onClick={handleSeeDetails}>See details</span>
         <ChevronRight className="w-4 group-hover/button:hidden" />
         <ArrowRight className="w-4 hidden group-hover/button:flex" />
       </button>

@@ -31,9 +31,9 @@ const NavBar = () => {
         >
           Home
         </Link>
-        <Link href={"/templates"}>
+        <Link href={"/"}>
           <button className="hover:bg-white border bg-black border-gray-900 hover:text-black rounded-xl px-5">
-            Create portfolio
+            Login
           </button>
         </Link>
       </nav>

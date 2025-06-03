@@ -3,7 +3,7 @@
 import { getTemplate } from "@/actions/getTemplate";
 import TemplateRender from "@/components/TemplateRender";
 import { useParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const TemplateDetailsPage = () => {
     const { templateId } = useParams();
@@ -23,20 +23,21 @@ const TemplateDetailsPage = () => {
                     );
                 }
                 setTemplateData(res.data);
+                console.log(`Template data: ${templateData}`)
             } catch (error) {
                 console.error('Error in fetching template details:', error);
             };
         };
 
         fetchTemplateDetails();
-    }, [templateId]);
+    }, [templateId, templateData]);
 
   return (
     <div>
         <h1 className="text-black text-center text-4xl md:text-5xl mb-10 max-w-[800px] m-auto">
-            {templateData ? templateData.name : 'Loading...'}
+            {templateData ? templateData.slug : 'Loading...'}
         </h1>
-        <TemplateRender templateData={templateData.sections} />
+        <TemplateRender sections={templateData?.sections} />
     </div>
   )
 }

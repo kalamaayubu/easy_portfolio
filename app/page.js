@@ -4,10 +4,12 @@ import Link from "next/link"
 
 const HomePage = () => {
   return (
-    <>
+    <div className="relative">
+      {/* Stick blue div for hiding content scrolled up */}
+    <div className="blur-div"/> 
     <section className="w-[95%] m-auto p-4 flex flex-col items-center text-center">
         <h1 className="mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl max-w-[500px] lg:max-w-[640px] text-center">
-          Build Your Dream 
+          Build Your
           <span className="blue-gradient-text"> Portfolio </span>
            in Minutes
         </h1>
@@ -24,7 +26,7 @@ const HomePage = () => {
       <CreatePortfolioBtn/>
     </section>
     <Footer/>
-    </>
+    </div>
   )
 }
 

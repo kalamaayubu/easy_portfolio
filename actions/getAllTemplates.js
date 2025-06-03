@@ -9,12 +9,11 @@ export async function getAllTemplates() {
     const { data, error } = await supabase
         .from('templates')
         .select('*')
-        .order('created_at', { ascending: false });
 
     if (error) {
         console.error('Error fetching templates:', error);
         return { success: false, error: 'Failed to fetch templates' };
     }
-
+    
     return { success: true, data };
 }

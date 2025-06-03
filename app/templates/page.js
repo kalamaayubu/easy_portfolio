@@ -7,6 +7,7 @@ import TemplateCard from "@/components/TemplateCard"
 const TemplatesPage = async () => {
   const res = await getAllTemplates();
 
+
   if (!res.success) {
     return (
       <div className="m-auto">
@@ -15,21 +16,14 @@ const TemplatesPage = async () => {
     );
   }
 
-  if (res.success) {
-    return (
-      <div className="m-auto">
-        <h1 className="text-black text-center text-4xl md:text-5xl mb-10 max-w-[800px] m-auto">Data fetched successfully</h1>
-      </div>
-    );
-  }
-
   const templates = res.data;
+  console.log(`Templates: ${templates}`)
   
   return (
-    <div className=" m-auto">
+    <div className="relative m-auto">
       <h1 className="text-black text-center text-4xl md:text-5xl mb-10 max-w-[800px] m-auto">Choose a template</h1>
       <div className="flex gap-3 sm:gap-5 md:gap-6 flex-wrap items-center justify-center mb-20">
-      {templates.map((templateData) => (
+      {templates?.map((templateData) => (
         <TemplateCard key={templateData.id} templateData={templateData} />
       ))}
       </div>

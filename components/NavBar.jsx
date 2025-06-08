@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const pathname = usePathname();
-  const isTemplateTestingPage = pathname.includes("/template_test");
+  const dontShowNavBar = pathname.includes("/template_test") || pathname.startsWith("/templates/")
   // Prevent rendering navbar on template testing page
-  if (isTemplateTestingPage) return null;
+  if (dontShowNavBar) return null;
 
   return (
-    <section className="sticky z-50 flex items-center justify-self-center justify-between w-[88%] max-w-[650px] bg-gray-300 bg-opacity-70 backdrop-blur-md px-3 top-6 rounded-xl bottom-0 gap-10 sm:mb-24 lg:mb-28 mb-20">
+    <section className="sticky z-50 flex items-center justify-self-center justify-between w-[88%] max-w-[650px] bg-gray-300 bg-opacity-70 backdrop-blur-md px-3 top-6 rounded-xl bottom-0 gap-10 mb-12 sm:mb-14 md:mb-16 lg:mb-18">
       <div className="items-center align-self-start flex">
         <Image
           src={"/assets/EP.png"}

@@ -3,19 +3,19 @@ const ProjectCard = ({ title, description, image, link }) => {
     <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300">
       {image && (
         <img
-          src={image}
+          src={`/assets/heroBg1.jpg`}
           alt={title}
           className="w-full h-40 object-cover rounded-md mb-3"
         />
       )}
       <h2 className="text-xl font-bold mb-2">{title}</h2>
-      <p className="text-gray-700 mb-3">{description}</p>
+      <p className="text-gray-700 mb-3 line-clamp-2">{description}</p>
       {link && (
         <a
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-500 hover:underline"
+          className="text-blue-500 hover:text-blue-600"
         >
           View Project →
         </a>

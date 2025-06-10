@@ -15,6 +15,5 @@ export async function getAllTemplates() {
         return { success: false, error: 'Failed to fetch templates' };
     }
     
-    console.log(`DATA FROM DATA SOURCE: ${JSON.stringify(data)}`)
     return { success: true, data };
 }

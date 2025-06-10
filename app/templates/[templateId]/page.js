@@ -1,7 +1,7 @@
 import TemplateRender from "@/components/TemplateRender";
 import { createClient } from "@/lib/supabase/server";
 
-// A server component that fetches template data and pass the sections to template render component
+// A server component that fetches template data and pass the sections to TemplateRender component
 export default async function TemplateDetailsPage({ params }) {
     const { templateId } = await params;
     const supabase = await createClient()
@@ -17,6 +17,5 @@ export default async function TemplateDetailsPage({ params }) {
         return <p>Error fetching template details... Please try again later</p>
     }
 
-    // console.log("TEMPLATE SECTIONS DATA FROM DATABASE:", data.template_body.sections)
-    return <TemplateRender sections={data.template_body.sections}/> 
+    return <TemplateRender data={data.template_body}/> 
 }

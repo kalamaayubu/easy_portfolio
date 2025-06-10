@@ -1,11 +1,11 @@
 import SectionRender from "./SectionRender"
 
-const TemplateRender = ({ sections }) => {
-  console.log('SECTIONS FROM TEMPLATErENDER:', sections)
+const TemplateRender = ({ data }) => {
+  console.log('TEMPLATE RENDER:', data)
   return (
     <div className="">
-      { sections?.map((section) => (
-        <SectionRender key={section.id} {...section}/>
+      { data?.sections?.map((section) => (
+        <SectionRender key={section.id} template_metadata={data} {...section}/>
       ))}
     </div>
   )

@@ -4,12 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-const NavBar = () => {
+const NavBar = ({ template_metadata, section_id, links }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  // Optional: fallback title/logo from template_metadata
+  const title = template_metadata?.name || "My Portfolio";
+  const logo = template_metadata?.logo || "/assets/EP.png";
+
 
   return (
     <>
-      <div className="w-full pt-4 pb-2 border-b border-gray-200 sticky">
+      <div className="w-full pt-4 pb-2 border-b border-gray-200 sticky top-0 z-20 bg-white">
         <div className="flex w-[98%] m-auto justify-between items-center">
           <div className="text-white text-lg font-bold flex items-center gap-2">
             <Image
@@ -20,8 +25,9 @@ const NavBar = () => {
               className="h-14 w-auto"
               priority
             />
-            <span className="text-gray-800">Easy Portfolio</span>
+            <span className="text-gray-800">{title}</span>
           </div>
+
           {/* Mobile navigation menu */}
           <button
             onClick={() => setIsOpen((prev) => !prev)}
@@ -45,42 +51,17 @@ const NavBar = () => {
 
           {/* Desktop navigation menu */}
           <nav className="gap-4 px-4 hidden md:flex">
-            <Link
-              href="/"
-              id="home"
-              className="hover:text-blue-500 active:scale-95"
-            >
-              Home
-            </Link>
-            <Link
-              href="/template_test"
-              id="contacts"
-              className="hover:text-blue-500 active:scale-95"
-            >
-              Contacts
-            </Link>
-            <Link
-              href="/template_test"
-              id="technology"
-              className="hover:text-blue-500 active:scale-95"
-            >
-              Technology
-            </Link>
-            <Link
-              href="/template_test"
-              id="services"
-              className="hover:text-blue-500 active:scale-95"
-            >
-              Services
-            </Link>
-            <Link
-              href="/template_test"
-              id="projects"
-              className="hover:text-blue-500 active:scale-95"
-            >
-              Projects
-            </Link>
+            {links?.map(link => (
+              <Link
+                href={link?.href}
+                id={section_id}
+                className="hover:text-blue-500 active:scale-95"
+              >
+                { link?.label }
+              </Link>
+            ))}
           </nav>
+
         </div>
       </div>
 
@@ -107,41 +88,17 @@ const NavBar = () => {
             </svg>
           </button>
           <nav className="md:hidden bg-white z-50 flex flex-col w-3/4 m-auto top-20 bottom-0 left-0 right-0 rounded-lg">
-            <Link
-              href="/"
-              id="home"
-              className="hover:text-blue-500 active:scale-95 px-4 py-3 hover:bg-gray-100"
-            >
-              Home
-            </Link>
-            <Link
-              href="/template_test"
-              id="contacts"
-              className="hover:text-blue-500 active:scale-95 px-4 py-3 hover:bg-gray-100"
-            >
-              Contacts
-            </Link>
-            <Link
-              href="/template_test"
-              id="technology"
-              className="hover:text-blue-500 active:scale-95 px-4 py-3 hover:bg-gray-100"
-            >
-              Technology
-            </Link>
-            <Link
-              href="/template_test"
-              id="services"
-              className="hover:text-blue-500 active:scale-95 px-4 py-3 hover:bg-gray-100"
-            >
-              Services
-            </Link>
-            <Link
-              href="/template_test"
-              id="projects"
-              className="hover:text-blue-500 active:scale-95 px-4 py-3 hover:bg-gray-100"
-            >
-              Projects
-            </Link>
+            { links?.map((link, index) => (
+              <Link 
+                key={index} 
+                href={link?.href} 
+                id={section_id} 
+                onClick={() => setIsOpen(false)}
+                className="hover:text-blue-500 active:scale-95 px-4 py-3 hover:bg-gray-100"
+              > 
+                {link?.label} 
+              </Link>
+            ))}
           </nav>
         </div>
       )}

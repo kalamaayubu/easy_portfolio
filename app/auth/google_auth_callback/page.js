@@ -1,7 +1,10 @@
-const GoogleAuthCallback = () => {
+import { Suspense } from "react";
+import GoogleAuthCallback from "./GoogleAuthCallback";
+
+export default function GoogleAuthCallbackPage () {
   return (
-    <div>GoogleAuthCallback</div>
+    <Suspense>
+      <GoogleAuthCallback/>
+    </Suspense>
   )
 }
-
-export default GoogleAuthCallback

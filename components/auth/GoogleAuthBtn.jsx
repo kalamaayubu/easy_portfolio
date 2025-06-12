@@ -21,7 +21,7 @@ const GoogleAuthBtn = () => {
         }
     }
   return (
-    <button onClick={handleGoogleAuth} className="flex gap-4 items-center mt-10 bg-white text-black justify-center border px-2 py-2 rounded-lg cursor-pointer hover:scale-95 active:scale-100 transition-all duration-300">
+    <button onClick={handleGoogleAuth} className="flex gap-4 items-center mt-10 whitespace-nowrap bg-white text-black justify-center border px-2 py-2 rounded-lg cursor-pointer hover:scale-95 active:scale-100 transition-all duration-300">
         <Image 
             width={1000} 
             height={1000} 

@@ -6,7 +6,9 @@ import { usePathname } from "next/navigation";
 
 const NavBar = () => {
   const pathname = usePathname();
-  const dontShowNavBar = pathname.includes("/template_test") || pathname.startsWith("/templates/")
+  const dontShowNavBar = pathname.includes("/template_test") || 
+  pathname.startsWith("/templates/") || 
+  pathname.startsWith("/auth")
   // Prevent rendering navbar on template testing page
   if (dontShowNavBar) return null;
 
@@ -31,7 +33,7 @@ const NavBar = () => {
         >
           Home
         </Link>
-        <Link href={"/"}>
+        <Link href={"/auth/authentication"}>
           <button className="hover:bg-white border bg-black border-gray-900 hover:text-black rounded-xl px-5">
             Login
           </button>

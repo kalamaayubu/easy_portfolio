@@ -1,6 +1,7 @@
 "use client"
 
 import { MoreVertical, X } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 const ChooseToUseTemplate = () => {
@@ -25,7 +26,7 @@ const ChooseToUseTemplate = () => {
             <h3 className="text-2xl font-bold mb-4">Are you looking to?</h3>
             <button className="py-3">Use this template</button>
             <button className="py-3">Leave a feedback</button>
-            <button className="py-3">Choose another template</button>
+            <button className="py-3"><Link href={`/templates`}>Choose another template</Link></button>
           </div>
         </div>
       </div>

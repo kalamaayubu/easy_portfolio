@@ -3,14 +3,34 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LogoutBtn from "./auth/LogoutBtn";
+import { useEffect, useState } from "react";
+import { getUser } from "@/actions/auth/getUser";
+import { Loader2 } from "lucide-react";
 
 const NavBar = () => {
   const pathname = usePathname();
-  const dontShowNavBar = pathname.includes("/template_test") || 
+  const [isAuthenticated, setIsAuthenticated] = useState(null)
+
+  const dontShowNavBar = 
+  pathname.includes("/template_test") || 
   pathname.startsWith("/templates/") || 
   pathname.startsWith("/auth")
-  // Prevent rendering navbar on template testing page
-  if (dontShowNavBar) return null;
+
+  // Check if user is authenticated and render the appropriate button
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const user = await getUser()
+      if (!user) {
+        return setIsAuthenticated(false)
+      }
+      setIsAuthenticated(true)
+    }
+      
+      checkAuthentication()
+  }, [pathname])
+
+  if (dontShowNavBar ) return null;
 
   return (
     <section className="sticky z-50 flex items-center justify-self-center justify-between w-[88%] max-w-[650px] bg-gray-300 bg-opacity-70 backdrop-blur-md px-3 top-6 rounded-xl bottom-0 gap-10 mb-12 sm:mb-14 md:mb-16 lg:mb-18">
@@ -33,11 +53,19 @@ const NavBar = () => {
         >
           Home
         </Link>
-        <Link href={"/auth/authentication"}>
-          <button className="hover:bg-white border bg-black border-gray-900 hover:text-black rounded-xl px-5">
-            Login
-          </button>
-        </Link>
+        {isAuthenticated ? (
+          <LogoutBtn/>
+        ) : (
+          <Link href={"/auth/authentication"}>
+            <button className="hover:bg-white border bg-black border-gray-900 hover:text-black rounded-xl px-5">
+              {isAuthenticated == null ? (
+                <Loader2 className="animate-spin text-white"/>
+              ) : (
+                "Login"
+              )}
+            </button>
+          </Link>
+        )}
       </nav>
     </section>
   );

@@ -1,17 +1,19 @@
 "use client"
 
 import { getUser } from "@/actions/auth/getUser";
-import { MoreVertical, X } from "lucide-react";
+import { Loader2, MoreVertical, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const ChooseToUseTemplate = ({ templateId }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
+  const [isRedirectingToLogin, setIsRedirectingToLogin] = useState(false)
   const router = useRouter()
 
   // Function to toggle the dropdown for choosing whether to use a template
-  const handleSeeMore = () => {
+  const handleMoreHorizontal = () => {
     setIsOpen(prev => !prev)
   }
 
@@ -24,16 +26,20 @@ const ChooseToUseTemplate = ({ templateId }) => {
       /* Redirect to login with a flag to show that the request for login is
         comming from the choice "Use this template" so as to redirect user to 
         the editing page instead of the normal dashboard after they are authenticated */
-      router.push(`/auth/authentication?from_template=${templateId}`)
+
+        setIsOpen(false) // Close the the dropdowm
+        setIsLoginModalOpen(true) 
+        return
     }
 
     // If user is already loged in, redirect them to the template editing page
-    router.push(`/user/edit-template/${templateId}`)
+    return router.push(`/user/edit-template/${templateId}`)
   }
+
   return (
     <>
       <div className="fixed size-10 sm:size-11 lg:size-12 bg-blue-700 top-24 z-40 left-2 shadow-lg shadow-gray-900 bg-opacity-80 backdrop:blur-3xl lg:left-4 rounded-full flex items-center justify-center text-white hover:bg-opacity-100">
-        <MoreVertical onClick={handleSeeMore} className="scale-50 active:scale-75 hover:cursor-pointer w-full h-full transition-all duration-300"/>
+        <MoreVertical onClick={handleMoreHorizontal} className="scale-50 active:scale-75 hover:cursor-pointer w-full h-full transition-all duration-300"/>
       </div>
       
       {/* small screen dropdown */}
@@ -55,6 +61,33 @@ const ChooseToUseTemplate = ({ templateId }) => {
         </div>
       </div>
        )}
+
+       {/* Login prompt modal */}
+       {isLoginModalOpen && (
+        <div className="fixed z-50 inset-0 bg-black bg-opacity-80 backdrop:blur-lg flex items-center justify-center">
+          <div className="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
+            <h2 className="text-xl font-semibold">Hold on! One quick step before continuing.</h2>
+            <p className="text-[15px] text-gray-600 mt-2">
+              Please log in to use this template.
+              <br />
+              It's all free 😂.
+            </p>
+            <div className="flex justify-end gap-2 mt-4">
+              <button onClick={() => setIsLoginModalOpen(false)} className="text-gray-500">Cancel</button>
+              <button onClick={() => {
+                setIsRedirectingToLogin(true)
+                router.push(`/auth/authentication?from_template=${templateId}`)
+                return setIsRedirectingToLogin(true)
+              }} 
+              className={`bg-blue-600 ${isRedirectingToLogin ? 'cursor-not-allowed' : ''} flex gap-2 items-center text-white px-4 py-2 rounded-md hover:bg-blue-700`}
+              disabled={isRedirectingToLogin}
+              >
+                {isRedirectingToLogin ? (<div className="flex gap-2 items-center"><Loader2 className="animate-spin w-5"/> Log in to continue</div>) : 'Log in to continue'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }

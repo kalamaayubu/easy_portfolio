@@ -1,11 +1,14 @@
 "use client"
 
+import { getUser } from "@/actions/auth/getUser";
 import { MoreVertical, X } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const ChooseToUseTemplate = () => {
+const ChooseToUseTemplate = ({ templateId }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const router = useRouter()
 
   // Function to toggle the dropdown for choosing whether to use a template
   const handleSeeMore = () => {
@@ -13,8 +16,19 @@ const ChooseToUseTemplate = () => {
   }
 
   // Function to use the selected template
-  const handleUseTemplate = () => {
+  const handleUseTemplate = async () => {
+    // Check if user is authenticated
+    const user = await getUser()
 
+    if (!user) {
+      /* Redirect to login with a flag to show that the request for login is
+        comming from the choice "Use this template" so as to redirect user to 
+        the editing page instead of the normal dashboard after they are authenticated */
+      router.push(`/auth/authentication?from_template=${templateId}`)
+    }
+
+    // If user is already loged in, redirect them to the template editing page
+    router.push(`/user/edit-template/${templateId}`)
   }
   return (
     <>

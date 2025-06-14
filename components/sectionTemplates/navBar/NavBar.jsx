@@ -51,10 +51,11 @@ const NavBar = ({ template_metadata, section_id, links }) => {
 
           {/* Desktop navigation menu */}
           <nav className="gap-4 px-4 hidden md:flex">
-            {links?.map(link => (
+            {links?.map((link, index) => (
               <Link
                 href={link?.href}
                 id={section_id}
+                key={index}
                 className="hover:text-blue-500 active:scale-95"
               >
                 { link?.label }

@@ -10,8 +10,12 @@ const TemplateCard = ({ templateData }) => {
   console.log(`ID: ${id}`)
   
   const handleSeeDetails = () => {
+    // Add template data to store for state management
+
+
     router.push(`/templates/${id}`);
-    // Optionally, you can also scroll to the top of the page
+    
+    // Scroll to the top of the page
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 

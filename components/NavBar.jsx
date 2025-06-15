@@ -12,11 +12,6 @@ const NavBar = () => {
   const pathname = usePathname();
   const [isAuthenticated, setIsAuthenticated] = useState(null)
 
-  const dontShowNavBar = 
-  pathname.includes("/template_test") || 
-  pathname.startsWith("/templates/") || 
-  pathname.startsWith("/auth")
-
   // Check if user is authenticated and render the appropriate button
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -28,7 +23,14 @@ const NavBar = () => {
     }
       
       checkAuthentication()
-  }, [pathname])
+  }, [pathname]);
+
+  // Pages on which to exclude the NavBar
+  const dontShowNavBar = 
+  pathname.includes("/template_test") || 
+  pathname.startsWith("/templates/") || 
+  pathname.startsWith("/auth") ||
+  pathname.startsWith("/user/edit_template");
 
   if (dontShowNavBar ) return null;
 

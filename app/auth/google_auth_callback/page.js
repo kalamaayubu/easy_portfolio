@@ -1,10 +1,11 @@
 import { Suspense } from "react";
 import GoogleAuthCallback from "./GoogleAuthCallback";
 
-export default function GoogleAuthCallbackPage () {
+export default async function GoogleAuthCallbackPage ({ searchParams }) {
+  const fromTemplate = await searchParams?.from_template;
   return (
     <Suspense>
-      <GoogleAuthCallback/>
+      <GoogleAuthCallback fromTemplate={fromTemplate}/>
     </Suspense>
   )
 }

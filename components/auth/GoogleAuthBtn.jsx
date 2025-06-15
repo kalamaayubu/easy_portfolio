@@ -3,15 +3,20 @@
 import { createClient } from "@/lib/supabase/client"
 import Image from "next/image"
 
-const GoogleAuthBtn = () => {
+const GoogleAuthBtn = ({ fromTemplate }) => {
     const supabase = createClient()
 
+    const redirectUrl = fromTemplate 
+        ? `${location.origin}/auth/google_auth_callback?from_template=${fromTemplate}`
+        : `${location.origin}/auth/google_auth_callback` 
+
+    
     // Function to handle authentication with google
     const handleGoogleAuth =  async () => {
         const {error} = await supabase.auth.signInWithOAuth({
             provider: "google",
             options: {
-                redirectTo: `${location.origin}/auth/google_auth_callback`,
+                redirectTo: redirectUrl
             },
         });
 

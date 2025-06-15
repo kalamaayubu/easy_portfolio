@@ -7,7 +7,8 @@ export async function GET (req) {
     const supabase = await createClient()
     const url = new URL(req.url);
     const code = url.searchParams.get("code")
-    console.log("OAuth code received:", code);
+    const fromTemplate = url.searchParams.get("from_template")
+    console.log('FROM TEMPLATE:', fromTemplate)
 
     if (!code) {
         console.error("Missing OAuth code in URL.");
@@ -16,7 +17,6 @@ export async function GET (req) {
 
     // Exchange the OAuth code for a session
     const {data, error:exchangeError} = await supabase.auth.exchangeCodeForSession(code)
-    console.log("Session data:", data);
     if (exchangeError || !data) {
         console.error("Error exchanging code for session:", exchangeError?.message);
         return NextResponse.redirect(new URL("/auth/login", req.url))
@@ -52,8 +52,6 @@ export async function GET (req) {
         return NextResponse.redirect(new URL("/auth/login", req.url))
     }
 
-    console.log('USER DATA:', user)
-
     // Feth the user role from the profiles table
     const { data: profile, error: profileError } = await supabase
         .from('profiles')
@@ -61,8 +59,7 @@ export async function GET (req) {
         .eq("id", user.id)
         .maybeSingle()
 
-        console.log("Profile data:", profile);
-
+    // Check if the profile was fetched successfully and has a role
     if (profileError || !profile?.role) {
         console.error("Error fetching user role from profiles table:", profileError?.message);
         return NextResponse.redirect(new URL("/auth/login", req.url))
@@ -90,6 +87,14 @@ export async function GET (req) {
 
     // Construct the redirect URL based on the user's 
     let redirectUrl = "/auth/authentication"
+
+    // If the request came from template details page, redirect to the editng page instead of usual darshboard
+    if (typeof fromTemplate === "string" && fromTemplate.trim() !== "" && fromTemplate !== "undefined" && fromTemplate !== "null") {
+        redirectUrl = `/user/edit_template/${fromTemplate}`
+        console.log("Redirecting to template editing PAGE:", redirectUrl);
+        // If the fromTemplate is provided, redirect to the template editing page
+        return NextResponse.json({ redirectUrl });
+    }
 
     switch (profile.role) {
         case "admin":

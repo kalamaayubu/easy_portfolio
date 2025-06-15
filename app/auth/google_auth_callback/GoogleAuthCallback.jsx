@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const GoogleAuthCallback = () => {
+const GoogleAuthCallback = ({ fromTemplate }) => {
   const [redirectUrl, setRedirectUrl] = useState("");
   const router = useRouter();
   const code = useSearchParams().get("code");
@@ -15,7 +15,7 @@ const GoogleAuthCallback = () => {
       if (!code) return;
 
       try {
-        const response = await fetch(`/api/auth/google_auth_callback?code=${code}`);
+        const response = await fetch(`/api/auth/google_auth_callback?code=${code}&from_template=${fromTemplate}`);
         if (!response.ok) {
           console.error("Failed to fetch redirect URL");
           return;
@@ -40,20 +40,22 @@ const GoogleAuthCallback = () => {
       <div className="fixed inset-0 bg-black opacity-80 backdrop:blur-3xl flex items-center justify-center">
         <div className="bg-white p-6 rounded-lg flex flex-col">
           <Settings
-            className="size-16 m-auto text-gray-800"
+            className="size-14 m-auto text-gray-800"
             style={{ animation: "spin 2.5s linear infinite" }}
           />
           <p className="text-center">We are redirecting you to your dashboard.</p>
-          <p>
+          {redirectUrl && (
+            <p>
             If this takes too long, click&nbsp;
             <Link
-              href={redirectUrl || "/"}
+              href={redirectUrl}
               className="text-blue-600 hover:underline"
             >
               here
             </Link>{" "}
             to navigate manually.
           </p>
+          )}
         </div>
       </div>
     </div>

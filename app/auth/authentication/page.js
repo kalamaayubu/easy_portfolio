@@ -1,7 +1,8 @@
 import GoogleAuthBtn from "@/components/auth/GoogleAuthBtn"
 import Image from "next/image"
 
-const AuthenticationPage = () => {
+const AuthenticationPage = ({ searchParams }) => {
+  const fromTemplate = searchParams?.from_template;
   return (
     <div className="flex min-h-screen bg-white sm:bg-gray-100">
     <div className="flex flex-col max-w-[600px] m-auto w-[80%] bg-white rounded-lg p-8 border sm:border-none sm:shadow-md">
@@ -10,7 +11,7 @@ const AuthenticationPage = () => {
             <h1 className=" md:text-4xl text-3xl -translate-y-1">Easy portfolio</h1>
         </div>
         <p className="text-center text-gray-500">Please log in to proceed</p>
-        <GoogleAuthBtn/>
+        <GoogleAuthBtn fromTemplate={fromTemplate}/>
         <div className="flex gap-3 items-center m-auto mt-4">
             <div className="size-2 rounded-full bg-black"/>
             <div className="size-2 rounded-full bg-black"/>

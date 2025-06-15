@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState =  {
     id: '',
+    isTemplateEditable: false, // Flag to indicate if the template is editable
     sections: []
 }
 
@@ -15,9 +16,14 @@ export const templateDataSlice = createSlice({
             const { id, sections } = action.payload
             state.id = id
             state.sections = sections
-        }
+        },
+
+        // ✅ New reducer to set isTemplateEditable separately
+        setIsTemplateEditable: (state, action) => {
+            state.isTemplateEditable = action.payload;
+        },
     }
 })
 
-export const { setTemplateData } = templateDataSlice.actions // Export action creator for setting template data
+export const { setTemplateData, setIsTemplateEditable } = templateDataSlice.actions // Export action creator for setting template data
 export default templateDataSlice.reducer // Export reducer function

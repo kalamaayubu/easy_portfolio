@@ -1,12 +1,10 @@
-'use client'
-
 import { use } from "react";
+import TemplateEditingClient from "../TemplateEditingClient";
 
 export default function TemplateEditingPage({ params }) {
-  const resolvedParams = use(params)
+  const { templateId } = use(params);
+
   return (
-    <div>
-      Editing template with ID: {resolvedParams.templateId}
-    </div>
+    <TemplateEditingClient templateId={templateId}/>
   );
 }

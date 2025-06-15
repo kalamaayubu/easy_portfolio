@@ -15,7 +15,6 @@ const TemplateRender = ({ data }) => {
     }
   }, [data])
   
-
   console.log('TEMPLATE RENDER:', data)
   return (
     <div className="">

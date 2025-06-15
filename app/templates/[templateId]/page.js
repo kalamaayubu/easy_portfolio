@@ -21,7 +21,7 @@ export default async function TemplateDetailsPage({ params }) {
     return (
         <div className="relative">
             <ChooseToUseTemplate templateId={templateId}/>
-            <TemplateRender data={data.template_body}/> 
+            <TemplateRender templateId={templateId} data={data.template_body}/> 
         </div>
     )
 }

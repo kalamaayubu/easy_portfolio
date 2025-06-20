@@ -1,10 +1,19 @@
-import { use } from "react";
+import { createClient } from "@/lib/supabase/server";
 import TemplateEditingClient from "../TemplateEditingClient";
 
-export default function TemplateEditingPage({ params }) {
-  const { templateId } = use(params);
+export default async function TemplateEditingPage({ params }) {
+  const { templateId } = params;
+  const supabase = await createClient();
 
-  return (
-    <TemplateEditingClient templateId={templateId}/>
-  );
+  const { data, error } = await supabase
+    .from("templates")
+    .select("template_body, id")
+    .eq("id", templateId)
+    .single();
+
+  if (error || !data) {
+    return <div>Error loading template</div>;
+  }
+
+  return <TemplateEditingClient initialData={{ id: data.id, sections: data.template_body.sections }} />;
 }

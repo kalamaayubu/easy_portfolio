@@ -3,15 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const NavBar = ({ template_metadata, section_id, links }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isTemplateEditable } = useSelector(state => state?.templateData)
 
   // Optional: fallback title/logo from template_metadata
   const title = template_metadata?.name || "My Portfolio";
   const logo = template_metadata?.logo || "/assets/EP.png";
 
-
+  
   return (
     <>
       <div className="w-full pt-4 pb-2 border-b border-gray-200 sticky top-0 z-40 bg-white">

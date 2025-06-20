@@ -11,7 +11,7 @@ const TemplateCard = ({ templateData }) => {
   
   const handleSeeDetails = () => {
     // Add template data to store for state management
-
+    // This is done in the <TemplateRender /> component
 
     router.push(`/templates/${id}`);
     

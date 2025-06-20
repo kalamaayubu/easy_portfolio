@@ -26,15 +26,15 @@ const GoogleAuthBtn = ({ fromTemplate }) => {
         }
     }
   return (
-    <button onClick={handleGoogleAuth} className="flex gap-4 items-center mt-10 whitespace-nowrap bg-white text-black justify-center border px-2 py-2 rounded-lg cursor-pointer hover:scale-95 active:scale-100 transition-all duration-300">
+    <button onClick={handleGoogleAuth} className="flex gap-4 items-center mt-10 max-w-96 m-auto w-full whitespace-nowrap bg-white text-black justify-center border px-2 py-2 rounded-lg cursor-pointer hover:scale-95 active:scale-100 transition-all duration-300">
         <Image 
             width={1000} 
             height={1000} 
             alt="google logo" 
             src={'/assets/googleLogo.jpeg'} 
-            className="w-10"
+            className="w-8 lg:w-9"
         />
-        <p>Continue with google</p>
+        <p className="text-[14px] sm:text-[16px]">Continue with google</p>
     </button>
   )
 }

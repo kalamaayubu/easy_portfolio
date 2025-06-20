@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import TemplateEditingClient from "../TemplateEditingClient";
+import ControlBtn from "@/components/client/editing/ControlBtn";
 
 export default async function TemplateEditingPage({ params }) {
   const { templateId } = params;
@@ -15,5 +16,10 @@ export default async function TemplateEditingPage({ params }) {
     return <div>Error loading template</div>;
   }
 
-  return <TemplateEditingClient initialData={{ id: data.id, sections: data.template_body.sections }} />;
+  return (
+    <div className="relative">
+      <ControlBtn/>
+      <TemplateEditingClient initialData={{ id: data.id, sections: data.template_body.sections }} />
+    </div>
+  ) 
 }

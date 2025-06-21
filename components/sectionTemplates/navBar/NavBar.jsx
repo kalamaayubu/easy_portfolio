@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -18,15 +17,7 @@ const NavBar = ({ template_metadata, section_id, links }) => {
     <>
       <div className="w-full pt-4 pb-2 border-b border-gray-200 sticky top-0 z-40 bg-white">
         <div className="flex w-[98%] m-auto justify-between items-center">
-          <div className="text-white text-lg font-bold flex items-center gap-2">
-            <Image
-              src={"/assets/EP.png"}
-              width={1000}
-              height={1000}
-              alt="Logo"
-              className="h-14 w-auto"
-              priority
-            />
+          <div className="text-white text-lg p-3 font-bold flex items-center gap-2">
             <span className="text-gray-800">{title}</span>
           </div>
 

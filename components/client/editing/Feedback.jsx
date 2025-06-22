@@ -1,10 +1,25 @@
 'use client'
 
-import { X } from "lucide-react"
-import { useState } from "react"
+import { submitFeedback } from "@/actions/user/submitFeedback";
+import { Loader2, X } from "lucide-react"
+import { useState } from "react";
 
 
-const UserFeedback = ({ setIsOpen, isOpen }) => {
+const UserFeedback = ({ setIsOpen, isOpen, templateId }) => {
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [feedbackText, setFeedbackText] = useState("");
+
+    const handleSubmitFeedback = async () => {
+        if (!feedbackText.trim()) return;
+
+        setIsProcessing(true);
+        const res = await submitFeedback(feedbackText, templateId);
+
+        // Clean up after submission
+        setIsProcessing(false);
+        setIsOpen(false);
+        setFeedbackText(""); // clear textarea
+    }
 
   return (
     <div className={`z-50 fixed inset-0 bg-black bg-opacity-85 backdrop:blur-3xl`}>
@@ -20,8 +35,12 @@ const UserFeedback = ({ setIsOpen, isOpen }) => {
                     className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Your feedback here..."
                     rows="5"
+                    value={feedbackText}
+                    onChange={(e) => setFeedbackText(e.target.value)}
                 />
-                <button className="">Submit</button>
+                <button disabled={isProcessing} onClick={handleSubmitFeedback} className={`${isProcessing ? "cursor-not-allowed" : ""}`}>
+                    {isProcessing ? <span><Loader2 className="animate-spin w-5 h-5 mr-2 inline-block" /> Submitting</span> : 'Submit'}
+                </button>
             </div>
         </div>
         </div>

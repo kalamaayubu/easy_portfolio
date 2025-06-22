@@ -18,7 +18,7 @@ export default async function TemplateEditingPage({ params }) {
 
   return (
     <div className="relative">
-      <ControlBtn/>
+      <ControlBtn templateId={templateId}/>
       <TemplateEditingClient initialData={{ id: data.id, sections: data.template_body.sections }} />
     </div>
   ) 

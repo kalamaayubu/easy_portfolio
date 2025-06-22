@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useState } from "react"
 import UserFeedback from "./Feedback"
 
-const ControlBtn = () => {
+const ControlBtn = ({ templateId }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [openFeedback, setOpenFeedback] = useState(false)
 
@@ -18,7 +18,7 @@ const ControlBtn = () => {
     // If feedback modal is open, return it
     if (openFeedback) {
         return (
-            <UserFeedback setIsOpen={setOpenFeedback} isOpen={openFeedback}/>
+            <UserFeedback setIsOpen={setOpenFeedback} isOpen={openFeedback} templateId={templateId}/>
         )
     }
 

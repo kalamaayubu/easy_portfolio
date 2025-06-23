@@ -1,13 +1,21 @@
 'use client'
 
-import { MoreVertical, X } from "lucide-react"
+import { Loader2, MoreVertical, X } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import UserFeedback from "./Feedback"
+import { useSelector } from "react-redux"
+import { publishPortfolio } from "@/actions/user/publishPortfolio"
+import { toast } from "sonner"
+import { set } from "lodash"
 
 const ControlBtn = ({ templateId }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [openFeedback, setOpenFeedback] = useState(false)
+    const [isProcessing, setIsProcessing] = useState(false)
+
+    // Get the templateData from store
+    const templateData = useSelector(state => state.templateData)
 
     // Function to handle leaving feedback
     const handleLeaveFeedback = () => {
@@ -15,7 +23,7 @@ const ControlBtn = ({ templateId }) => {
         setOpenFeedback(true); // Open the feedback modal
     }
 
-    // If feedback modal is open, return it
+    // If feedback modal isOpen, return it
     if (openFeedback) {
         return (
             <UserFeedback setIsOpen={setOpenFeedback} isOpen={openFeedback} templateId={templateId}/>
@@ -23,6 +31,22 @@ const ControlBtn = ({ templateId }) => {
     }
 
     // Function to handle publishing portfolio
+    const handlePublishPortfolio = async () => {
+      setIsProcessing(true)
+
+      // Simulate a delay for processing
+      await new Promise(resolve => setTimeout(resolve, 5000))
+
+      // const res = await publishPortfolio(templateData)
+      // if (!res.success) {
+      //   toast.error('Publish failed, please try again later')
+      //   return;
+      // }
+
+      toast.success('Your portfolio is published successfully')
+      setIsProcessing(false)
+      setIsOpen(false)
+    }
   return (
     <>
       <div className="fixed size-10 sm:size-11 lg:size-12 bg-blue-700 top-24 z-40 left-2 shadow-lg shadow-gray-900 bg-opacity-80 backdrop:blur-3xl lg:left-4 rounded-full flex items-center justify-center text-white hover:bg-opacity-100">
@@ -40,7 +64,11 @@ const ControlBtn = ({ templateId }) => {
                 <div className="h-[7px] w-16 rounded-full bg-black m-auto -translate-y-4"/>
                 <h3 className="text-2xl font-bold mb-4">Are you looking to?</h3>
                 <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 max-w-[600px] m-auto w-full">
-                <button  className="py-3">Publish portfolio</button>
+                <button disabled={isProcessing} onClick={handlePublishPortfolio}  className={`py-3 flex items-center justify-center ${isProcessing ? 'cursor-not-allowed opacity-80' : ''}`}>
+                  {isProcessing ? (
+                    <span className="flex items-center"><Loader2 className="text-white mr-2 w-5 animate-spin"/>Publishing portfolio</span>
+                  ) : ('Publish your portfolio')}
+                </button>
                 <button onClick={handleLeaveFeedback} className="py-3">Leave a feedback</button>
                 <button className="py-3"><Link href={`/templates`}>Choose another template</Link></button>
                 </div>

@@ -3,7 +3,7 @@
 import { setIsTemplateEditable, setTemplateData } from "@/app/redux/slices/templateDataSlice";
 import TemplateEditorRender from "@/components/template/TemplateEditorRender";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function TemplateEditingClient({ initialData  }) {
   const dispatch = useDispatch()

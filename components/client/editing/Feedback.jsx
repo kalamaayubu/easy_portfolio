@@ -1,13 +1,34 @@
 'use client'
 
+import { getUser } from "@/actions/auth/getUser";
 import { submitFeedback } from "@/actions/user/submitFeedback";
 import { Loader2, X } from "lucide-react"
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 
 const UserFeedback = ({ setIsOpen, isOpen, templateId }) => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [feedbackText, setFeedbackText] = useState("");
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const router = useRouter()
+
+    // Check if user is authenticated
+    useEffect(() => {
+        const checkAuthentication = async () => {
+            const userData = await getUser()
+            if (userData?.user) {
+                setIsAuthenticated(true);
+            } else {
+                setIsAuthenticated(false);
+                // Redirect to login if not authenticated
+                router.push("/auth/authentication?redirect=/templates");
+            }
+        }
+
+        checkAuthentication();
+    }, [isAuthenticated])
 
     const handleSubmitFeedback = async () => {
         if (!feedbackText.trim()) return;
@@ -15,11 +36,25 @@ const UserFeedback = ({ setIsOpen, isOpen, templateId }) => {
         setIsProcessing(true);
         const res = await submitFeedback(feedbackText, templateId);
 
+        if (!res.success) {
+            console.error("Error submitting feedback:", res.error); 
+            setIsProcessing(false);
+            return;
+        }
+
+        // Inform user of successful submission
+        toast.success("Submitted successfully, we are working to improve", {
+            duration: 3000,
+        });
+
         // Clean up after submission
         setIsProcessing(false);
         setIsOpen(false);
         setFeedbackText(""); // clear textarea
     }
+
+     // Don't render if user is not authenticated
+    if (!isAuthenticated) return null
 
   return (
     <div className={`z-50 fixed inset-0 bg-black bg-opacity-85 backdrop:blur-3xl`}>

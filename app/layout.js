@@ -1,6 +1,7 @@
 import NavBar from "@/components/NavBar";
 import "../styles/globals.css";
 import ReduxProvider from "@/components/client/ReduxProvider";
+import { Toaster } from "sonner";
 
 export const metadata = {
   title: 'My App',
@@ -14,6 +15,7 @@ const RootLayout = ({children}) => {
             <ReduxProvider>
               <NavBar />
               {children}
+              <Toaster richColors position="top-left" />
             </ReduxProvider>
         </body>
     </html>

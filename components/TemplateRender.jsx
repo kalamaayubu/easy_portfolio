@@ -5,15 +5,15 @@ import SectionRender from "./SectionRender"
 import { useDispatch } from "react-redux"
 import { setTemplateData } from "@/app/redux/slices/templateDataSlice"
 
-const TemplateRender = ({ data }) => {
+const TemplateRender = ({ templateId, data }) => {
   const dispatch = useDispatch()
 
   // Add template data to store for state management
   useEffect(() => {
     if (data) {
-      dispatch(setTemplateData(data))
+      dispatch(setTemplateData({id: templateId, sections: data.sections}))
     }
-  }, [data])
+  }, [data, templateId])
   
   console.log('TEMPLATE RENDER:', data)
   return (

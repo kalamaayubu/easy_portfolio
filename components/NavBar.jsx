@@ -26,11 +26,14 @@ const NavBar = () => {
   }, [pathname]);
 
   // Pages on which to exclude the NavBar
+  const usernameTemplateRegex = /^\/[^/]+\/[^/]+$/;
+
   const dontShowNavBar = 
   pathname.includes("/template_test") || 
   pathname.startsWith("/templates/") || 
   pathname.startsWith("/auth") ||
-  pathname.startsWith("/user/edit_template");
+  pathname.startsWith("/user/edit_template") ||
+  usernameTemplateRegex.test(pathname) // ✅ matches /[username]/[templateId]
 
   if (dontShowNavBar ) return null;
 

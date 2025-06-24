@@ -34,14 +34,12 @@ const ControlBtn = ({ templateId }) => {
     const handlePublishPortfolio = async () => {
       setIsProcessing(true)
 
-      // Simulate a delay for processing
-      await new Promise(resolve => setTimeout(resolve, 5000))
-
-      // const res = await publishPortfolio(templateData)
-      // if (!res.success) {
-      //   toast.error('Publish failed, please try again later')
-      //   return;
-      // }
+      // Publish the portfolio using the publishPortfolio action
+      const res = await publishPortfolio(templateData)
+      if (!res.success) {
+        toast.error('Publish failed, please try again later')
+        return;
+      }
 
       toast.success('Your portfolio is published successfully')
       setIsProcessing(false)

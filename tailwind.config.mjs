@@ -9,20 +9,6 @@ export default {
   ],
   theme: {
   	extend: {
-		keyframes: {
-			marquee: {
-				'0%': { transform: 'translateX(0%)' },
-				'100%': { transform: 'translateX(-50%)' },
-			},
-			'marquee-reverse': {
-				'0%': { transform: 'translateX(0%)' },
-				'100%': { transform: 'translateX(50%)' },
-			}
-      	},
-		animation: {
-			marquee: 'marquee 30s linear infinite',
-			'marquee-reverse': 'marquee-reverse 30s linear infinite',
-		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

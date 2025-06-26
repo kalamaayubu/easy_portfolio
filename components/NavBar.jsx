@@ -38,7 +38,7 @@ const NavBar = () => {
   if (dontShowNavBar ) return null;
 
   return (
-    <section className="sticky z-50 flex items-center justify-self-center justify-between w-[88%] max-w-[650px] bg-gray-300 bg-opacity-70 backdrop-blur-sm px-3 top-6 rounded-xl bottom-0 gap-10 mb-10 sm:mb-12 md:mb-14 lg:mb-16">
+    <section className="sticky z-50 flex items-center justify-self-center justify-between w-[88%] max-w-[650px] bg-gray-200 bg-opacity-90 backdrop-blur-sm px-3 top-6 rounded-xl p-1 bottom-0 gap-10 mb-10 sm:mb-12 md:mb-14 lg:mb-16">
       <div className="items-center align-self-start flex">
         <Image
           src={"/assets/EP.png"}

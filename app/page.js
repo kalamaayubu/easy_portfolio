@@ -3,7 +3,7 @@ import CreatePortfolioBtn from "@/components/CreatePortfolioBtn"
 import Footer from "@/components/Footer"
 import Featured from "@/components/landing/Featured"
 import ProblemSolution from "@/components/landing/ProblemSolution"
-import Testimonials from "@/components/landing/Testimonials"
+import TestimonialSection from "@/components/landing/TestimonialSection"
 
 const HomePage = () => {
   return (
@@ -31,7 +31,7 @@ const HomePage = () => {
    <ProblemSolution/>
 
     {/* Testimonials section */}
-    <Testimonials/>
+    <TestimonialSection/>
 
     <section className="w-[95%] m-auto max-w-[640px] p-4 flex flex-col items-center text-center mt-20">
       <h1 className="mb-6 text-[30px] sm:text-3xl md:text-4xl lg:text-5xl max-w-[500px] lg:max-w-[640px] text-center">Make Something You’ll Be Proud to Share</h1>

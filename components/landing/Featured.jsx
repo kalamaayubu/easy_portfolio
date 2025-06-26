@@ -23,7 +23,7 @@ const Featured = () => {
 
   return (
     <>
-        <p className="text-center purple-gradient-text text-sm mt-28 mb-6 border border-gray-800 px-5 py-1 rounded-full w-fit m-auto">FEATURED</p>
+    <p className="text-center purple-gradient-text text-sm mt-28 mb-6 border border-gray-800 px-5 py-1 rounded-full w-fit m-auto">FEATURED</p>
    <section className="overflow-hidden bg-gradient-to-r from-fuchsia-500 to-orange-500 py-2 relative">
     {/* <div className="absolute top-0 bottom-0 left-0 w-1/6 lg:w-1/12 bg-gradient-to-r from-white via-white/70 to-transparent backdrop-blur-sm z-10 pointer-events-none" />
     <div className="absolute top-0 bottom-0 right-0 w-1/6 lg:w-1/12 bg-gradient-to-l from-white via-white/70 to-transparent backdrop-blur-sm z-10 pointer-events-none" />

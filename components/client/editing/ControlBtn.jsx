@@ -7,15 +7,17 @@ import UserFeedback from "./Feedback"
 import { useSelector } from "react-redux"
 import { publishPortfolio } from "@/actions/user/publishPortfolio"
 import { toast } from "sonner"
-import { set } from "lodash"
+import CongratsCard from "../CongratsCard"
 
 const ControlBtn = ({ templateId }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [openFeedback, setOpenFeedback] = useState(false)
     const [isProcessing, setIsProcessing] = useState(false)
+    const [showCongrats, setShowCongrats] = useState(false);
 
     // Get the templateData from store
     const templateData = useSelector(state => state.templateData)
+    
 
     // Function to handle leaving feedback
     const handleLeaveFeedback = () => {
@@ -41,12 +43,26 @@ const ControlBtn = ({ templateId }) => {
         return;
       }
 
-      toast.success('Your portfolio is published successfully')
-      setIsProcessing(false)
-      setIsOpen(false)
+      console.log('Portfolio published successfully:', res.data)
+
+      // Show success(congrats) modal
+      if (res.success) {
+        setIsProcessing(false)
+        setIsOpen(false)
+        setShowCongrats(true);
+      }
     }
   return (
     <>
+      {showCongrats && (
+        <CongratsCard 
+          title="🎉 Portfolio Published!"
+          message="Congratulations! Your portfolio is now live."
+          action1={{ label: "View Portfolio", href: `/` }}
+          action2={{ label: "Share Link", href: `/templates` }}
+          onClose={() => setShowCongrats(false)}
+        />
+      )}
       <div className="fixed size-10 sm:size-11 lg:size-12 bg-blue-700 top-24 z-40 left-2 shadow-lg shadow-gray-900 bg-opacity-80 backdrop:blur-3xl lg:left-4 rounded-full flex items-center justify-center text-white hover:bg-opacity-100">
         <MoreVertical onClick={() => setIsOpen(prev => !prev)}  className="scale-50 active:scale-75 hover:cursor-pointer w-full h-full transition-all duration-300"/>
       </div>

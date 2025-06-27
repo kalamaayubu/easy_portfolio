@@ -17,7 +17,6 @@ export async function getTemplateToView(userName, templateId) {
         `)
         .eq('template_id', templateId)
         .eq('profiles.username', userName)
-        .maybeSingle()
 
     if (error) {
         console.error('Error fetching template:', error)

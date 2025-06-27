@@ -21,5 +21,6 @@ export async function publishPortfolio(templatedata) {
         return { success: false, error: error.message }
     }
 
+    console.log('Portfolio published successfully:', data)
     return { success: true, data, message: "Portfolio published successfully" }
 }

@@ -23,7 +23,7 @@ const TemplateCard = ({ templateData }) => {
     <div className="rounded-xl relative w-56 h-60 group hover:-translate-y-1 transition-all duration-300 ease-in-out shadow-lg">
       <div className="h-60 w-56 relative overflow-hidden rounded-xl">
         <Image
-          src={"/assets/chooseCloudMessaging.png"}
+          src={"/assets/templatesScreenshorts/portfolio1.png"}
           width={1000}
           height={1000}
           alt="CardImage"

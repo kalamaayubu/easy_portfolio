@@ -65,7 +65,7 @@ const ProblemSolution = () => {
             </p>
             <div className="flex flex-col m-auto lg:m-0 lg:mt-6 gap-2 mt-6">
               <div className="flex gap-4 rounded-md border p-4 px-8 lg:w-3/4"><Share2Icon className="text-purple-500"/> <p>Share their work</p></div>
-              <div className="flex gap-4 rounded-md border p-4 px-8 lg:w-3/4"><GraduationCap className="text-purple-500"/> <p>Be professional</p></div>
+              <div className="flex gap-4 rounded-md border p-4 px-8 lg:w-3/4"><GraduationCap className="text-purple-500"/> <p>In a professional way</p></div>
               <div className="flex gap-4 rounded-md border p-4 px-8 lg:w-3/4"><CloudLightningIcon className="text-purple-500"/> <p>And get it live, fast</p></div>
             </div>
           </div>

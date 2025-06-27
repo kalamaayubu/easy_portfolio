@@ -49,14 +49,15 @@ const ProblemSolution = () => {
       {/* The solution section */}
       <div className="flex flex-col m-auto lg:flex-row lg:w-full lg:justify-between lg:m-auto gap-4 lg:gap-8 xl:gap-12 mt-10 lg:mt-14">
           <h1 className="text-[30px] lg:hidden text-center m-auto sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">The Solution</h1>
-          <div className="">
-            <Image
-              src="/assets/bgimg.webp"
-              width={1000}
-              height={1000}
-              alt="Problem illustration"
-              className="m-auto lg:w-[90%] w-[90%] max-w-[700px]"
-            /> 
+          <div className="relative w-[85%] max-w-[400px] lg:max-w-[350px] bg-white shadow-xl p-6 lg:p-4 m-auto rounded-2xl overflow-hidden group">
+            <video
+              src="/assets/videos/solutionVid.mp4" // ✅ your actual video path
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="rounded-xl w-full h-auto"
+          />
           </div>
           <div className="flex flex-col">
               <h1 className="text-[30px] hidden lg:flex sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">The Solution</h1>

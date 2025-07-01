@@ -3,7 +3,7 @@ import TestimonialCard from "./TestimonialCard"
 const TestimonialSection = () => {
   return (
     <div className="m-auto max-w-7xl w-[80%]">
-        <p className="text-center purple-gradient-text text-sm mt-28 mb-6 border border-gray-800 px-5 py-1 rounded-full w-fit m-auto">TESTIMONIALS</p>
+        <p className="section-header">TESTIMONIALS</p>
         <div className="flex justify-center">
         <div className="grid grid-cols-1 max-w-[12800px] md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-4 xl:gap-6">
         <TestimonialCard 

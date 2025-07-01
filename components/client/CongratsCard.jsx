@@ -8,10 +8,11 @@ import Link from "next/link";
 const CongratsCard = ({ title, message, action1, action2, onClose}) => {
   useEffect(() => {
     confetti({
-      particleCount: 200,
+      particleCount: 500,
       spread: 70,
       origin: { y: 0.6 },
-      gravity: 0.7,
+      gravity: 0.6,
+      startVelocity: 50,
     });
   }, []);
 

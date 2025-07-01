@@ -5,16 +5,18 @@ import Image from "next/image";
 
 const ProblemSolution = () => {
   return (
-     <section className="flex flex-col pt-32 w-[85%] m-auto">
-      <p className="text-center purple-gradient-text text-sm border mb-4 border-gray-800 px-5 py-1 rounded-full w-fit m-auto">PROBLEM / SOLUTION</p>
+     <section className="flex flex-col w-[85%] m-auto">
+      <p className="section-header">PROBLEM / SOLUTION</p>
       <div className="mb-8">
         <div className="flex flex-col">
           <div className="hidden gap-8 xl:gap-12 items-center w-[95%] max-w-[1200px] justify-between m-auto lg:flex">
             <div className="flex flex-col ml-8">
-              <h1 className="text-[30px] sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">The Problem</h1>
-              <p className="text-gray-500 text-xl mb-4 w-[95%] lg:w-full max-w-[500px] xl:max-w-[550px] m-auto">
-                Building a dev portfolio sounds easy — until you’re knee-deep in code, layout tweaks, and deployment configs.
-                You’re either customizing clunky templates which needs a resilient expert to work with, or using &quot;portfolio builders&quot; that has alot of friction such as a long process authentication and the need for a credit card or something of that kind... You get the point. It’s just frustrating.
+              <h1 className="text-[30px] sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">When Sharing Projects Feels Like a Project</h1>
+              <p className="text-gray-500 text-xl mb-4 w-[95%] lg:w-full max-w-[500px] xl:max-w-[550px]">
+                Building a dev portfolio sounds easy — until it's not.
+You end up knee-deep in code, layout tweaks, and deployment configs.
+You’re either stuck with clunky templates or forced to learn tools you don’t need.
+It’s frustrating.
               </p>
             </div>
             <div className="">
@@ -27,7 +29,8 @@ const ProblemSolution = () => {
             />
             </div>
           </div>
-          <h1 className="text-[30px] m-auto sm:text-3xl md:text-4xl lg:text-5xl lg:hidden max-w-[500px] xl:max-w-[640px] mb-4">The Problem</h1>
+          {/* The heading for small screens */}
+          <h1 className="text-[30px] text-center m-auto sm:text-3xl md:text-4xl lg:text-5xl lg:hidden max-w-[500px] xl:max-w-[640px] mb-4">When Sharing Projects Feels Like a Project</h1>
           <div>
             <Image
               src="/assets/trials/stress.gif"
@@ -48,7 +51,7 @@ const ProblemSolution = () => {
 
       {/* The solution section */}
       <div className="flex flex-col m-auto lg:flex-row lg:w-full lg:justify-between lg:m-auto gap-4 lg:gap-8 xl:gap-12 mt-10 lg:mt-14">
-          <h1 className="text-[30px] lg:hidden text-center m-auto sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">The Solution</h1>
+          <h1 className="text-[30px] lg:hidden text-center m-auto sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">Showcase Your Work, Without the Work</h1>
           <div className="relative w-[85%] max-w-[400px] lg:max-w-[350px] bg-white shadow-xl p-6 lg:p-4 m-auto rounded-2xl overflow-hidden group">
             <video
               src="/assets/videos/solutionVid.mp4" // ✅ your actual video path
@@ -60,7 +63,7 @@ const ProblemSolution = () => {
           />
           </div>
           <div className="flex flex-col">
-              <h1 className="text-[30px] hidden lg:flex sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">The Solution</h1>
+              <h1 className="text-[30px] hidden lg:flex sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">Showcase Your Work, Without the Work</h1>
             <p className="text-gray-500 text-xl m-auto text-center lg:text-start max-w-[500px] xl:max-w-[550px] px-2">
               <span className="font-bold">Easyportfolioo</span> removes all that friction. It’s a platform designed specifically for individuals who just want to:
             </p>

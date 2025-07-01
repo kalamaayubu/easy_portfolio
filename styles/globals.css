@@ -23,6 +23,12 @@
   .blur-div {
     @apply sticky top-0 right-0 left-0 h-16 z-30 bg-white bg-opacity-90 backdrop-blur-2xl;
   }
+  .section-header {
+    @apply text-center purple-gradient-text text-sm mt-28 mb-6 border border-gray-800 px-5 py-1 rounded-full w-fit m-auto;
+  }
+  .purple-gradient-card {
+    @apply bg-gradient-to-tr from-fuchsia-500 from-20% to-orange-500 to-95% p-4 rounded-lg;
+  }
 
 /* Marquee animations */
   @keyframes marquee {

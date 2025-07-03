@@ -27,7 +27,7 @@
     @apply text-center purple-gradient-text text-sm mt-28 mb-6 border border-gray-800 px-5 py-1 rounded-full w-fit m-auto;
   }
   .purple-gradient-card {
-    @apply bg-gradient-to-tr from-fuchsia-500 from-20% to-orange-500 to-95% p-4 rounded-lg;
+    @apply bg-gradient-to-tr from-fuchsia-500 from-20% to-orange-500 to-95% p-4;
   }
 
 /* Marquee animations */

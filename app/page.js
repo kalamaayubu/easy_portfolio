@@ -38,9 +38,11 @@ const HomePage = () => {
     <FeedbackSection/>
 
     {/* Call to action section */}
-    <section className="w-[95%] m-auto p-4 flex flex-col items-center text-center">
-      <p className="section-header">BUILD AND SHARE</p>
-      <p className="text-gray-500 text-xl max-w-[640px] mb-4">We&apos;ve got to the end of this page, the only thing you can do now is to create your portfolio. Click the button below to start creating your portfolio.</p>
+    <section className="m-auto flex flex-col items-center text-center">
+      <div className="p-4 w-[95%]">
+        <p className="section-header ">BUILD AND SHARE</p>
+        <p className="text-gray-500 text-xl m-auto max-w-[640px] mb-4">We&apos;ve got to the end of this page, the only thing you can do now is to create your portfolio. Click the button below to start creating your portfolio.</p>
+      </div>
       <CTA/>
     </section>
     <Footer/>

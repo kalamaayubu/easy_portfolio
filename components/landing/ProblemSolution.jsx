@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const ProblemSolution = () => {
   return (
-     <section className="flex flex-col w-[85%] m-auto">
+     <section id="problem-solution"  className="flex flex-col w-[85%] m-auto">
       <p className="section-header">PROBLEM / SOLUTION</p>
       <div className="mb-8">
         <div className="flex flex-col">

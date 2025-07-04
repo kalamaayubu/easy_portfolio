@@ -9,7 +9,21 @@ export async function submitFeedback(content, templateId) {
 
     // Get userId from cookies
     const userData = await getUser()
-    const { id } = userData?.user
+    const id = userData?.user.id
+
+    // If user id are not available, insert into the anonymous_feedback table
+    if (!id) {
+        const { data: anonymousFeedbackData, error: anonymousFeedbackError} = await supabase
+            .from('anonymous_feedback')
+            .insert([{ content }])
+
+        if (anonymousFeedbackError) {
+            console.error("Error publishing anonymous feedback")
+            return { success: false, error: anonymousFeedbackError.message }
+        }
+
+        return { success: true, message: "Thank you for the feedback, we are working to provide the best experience."}
+    }
 
     const { data, error } = await supabase
         .from('feedbacks')

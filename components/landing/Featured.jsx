@@ -22,7 +22,7 @@ const Featured = () => {
 
 
   return (
-    <>
+    <div id='featured'>
     <p className="section-header">FEATURED PORTFOLIOS</p>
    <section className="overflow-hidden bg-gradient-to-r from-fuchsia-500 to-orange-500 py-2 relative">
     {/* <div className="absolute top-0 bottom-0 left-0 w-1/6 lg:w-1/12 bg-gradient-to-r from-white via-white/70 to-transparent backdrop-blur-sm z-10 pointer-events-none" />
@@ -57,7 +57,7 @@ const Featured = () => {
         </div>
       </div>
     </section>
-    </>
+    </div>
   )
 }
 

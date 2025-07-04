@@ -9,7 +9,7 @@ import TestimonialSection from "@/components/landing/TestimonialSection"
 
 const HomePage = () => {
   return (
-    <div className="relative">
+    <div id="home"  className="relative">
       {/* Stick blue div for hiding content scrolled up */}
     <div className="blur-div"/> 
     <section className="relative overflow-hidden pb-16 lg:pb-12 pt-12 lg:pt-4 bg-white backdrop:blur-2xl m-auto p-4  flex flex-col items-center text-center">
@@ -38,7 +38,7 @@ const HomePage = () => {
     <FeedbackSection/>
 
     {/* Call to action section */}
-    <section className="m-auto flex flex-col items-center text-center">
+    <section id="cta" className="m-auto flex flex-col items-center text-center">
       <div className="p-4 w-[95%]">
         <p className="section-header ">BUILD AND SHARE</p>
         <p className="text-gray-500 text-xl m-auto max-w-[640px] mb-4">We&apos;ve got to the end of this page, the only thing you can do now is to create your portfolio. Click the button below to start creating your portfolio.</p>

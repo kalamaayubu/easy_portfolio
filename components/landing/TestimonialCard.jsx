@@ -1,18 +1,10 @@
+import Quote from "@/public/assets/Quote"
 import Image from "next/image"
 
 const TestimonialCard = ({ testimonial, testimonailPic, name, occupation}) => {
   return (
     <div className="border p-4 px-6 rounded-xl flex flex-col max-w-[400px] bg-white">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="url(#fuchsiaToOrange)">
-            <defs>
-                <linearGradient id="fuchsiaToOrange" x1="0%" y1="100%" x2="100%" y2="0%">
-                <stop offset="20%" stop-color="#d946ef"/>
-                <stop offset="95%" stop-color="#f97316"/>
-                </linearGradient>
-            </defs>
-            <text x="5" y="50" font-size="48" font-family="Georgia, serif" fill="url(#fuchsiaToOrange)">“</text>
-        </svg>
-
+        <Quote/>
         <p className="text-gray-500 mb-3">{testimonial}</p>
         <div className="flex gap-4 items-center">
             <div>

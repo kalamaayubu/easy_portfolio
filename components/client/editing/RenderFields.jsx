@@ -1,25 +1,29 @@
 'use client'
 
-import _set from "lodash/set";
+import _set from "lodash/set"; // Utility functions to safely set nested properties in an object
+import _get from "lodash/get"; // Utility functions to safely get nested properties in an object
+import cloneDeep from "lodash/cloneDeep"; // Utility to create a deep copy of the data to prevent direct mutation
 
 const RenderFields = ({ data, onChange, path = "" }) => {
-  // Unified change handler for deeply nested updates
   const handleChange = (fieldPath, value) => {
-    const updated = { ...data };
+    const updated = cloneDeep(data);
     _set(updated, fieldPath, value);
     onChange(updated);
   };
 
-  const renderField = (key, value, currentPath) => {
-    const fullPath = path ? `${path}.${key}` : key;
+  // Recursive function to render fields based on their type(string, number, boolean, array, object)
+  const renderField = (key, _, currentPath) => {
+    const fullPath = currentPath ? `${currentPath}.${key}` : key;
+    const value = _get(data, fullPath);
 
+    // Render string or number as a text input
     if (typeof value === "string" || typeof value === "number") {
       return (
         <div key={fullPath} className="mb-4">
           <label className="text-sm text-gray-600">{fullPath}</label>
           <input
             type="text"
-            value={value}
+            value={value ?? ""}
             onChange={(e) => handleChange(fullPath, e.target.value)}
             className="w-full px-3 py-2 border rounded mt-1"
           />
@@ -27,14 +31,29 @@ const RenderFields = ({ data, onChange, path = "" }) => {
       );
     }
 
+    // Render boolean as a checkbox
+    if (typeof value === "boolean") {
+      return (
+        <div key={fullPath} className="mb-4">
+          <label className="text-sm text-gray-600 mr-2">{fullPath}</label>
+          <input
+            type="checkbox"
+            checked={value}
+            onChange={(e) => handleChange(fullPath, e.target.checked)}
+          />
+        </div>
+      );
+    }
+
+    // Render arrays as a list of nested fields
     if (Array.isArray(value)) {
       return (
         <div key={fullPath} className="mb-4 border p-2 rounded bg-gray-50">
-          <label className="text-sm text-gray-600 block mb-2">{key}</label>
-          {value.map((item, index) => (
+          <label className="text-sm text-gray-600 block mb-2">{fullPath}</label>
+          {value.map((_, index) => (
             <div key={`${fullPath}[${index}]`} className="pl-2 border-l mb-3">
-              {Object.entries(item).map(([k, v]) =>
-                renderField(k, v, `${fullPath}[${index}]`)
+              {Object.keys(value[index] || {}).map((k) =>
+                renderField(k, null, `${fullPath}[${index}]`)
               )}
             </div>
           ))}
@@ -42,13 +61,14 @@ const RenderFields = ({ data, onChange, path = "" }) => {
       );
     }
 
+    // Render objects as nested fields
     if (typeof value === "object" && value !== null) {
       return (
         <div key={fullPath} className="mb-4 border p-2 rounded bg-gray-50">
-          <label className="text-sm text-gray-600 block mb-2">{key}</label>
+          <label className="text-sm text-gray-600 block mb-2">{fullPath}</label>
           <div className="pl-2 border-l">
-            {Object.entries(value).map(([k, v]) =>
-              renderField(k, v, fullPath)
+            {Object.keys(value).map((k) =>
+              renderField(k, null, fullPath)
             )}
           </div>
         </div>
@@ -60,7 +80,7 @@ const RenderFields = ({ data, onChange, path = "" }) => {
 
   return (
     <>
-      {Object.entries(data).map(([key, value]) => renderField(key, value, path))}
+      {Object.keys(data).map((key) => renderField(key, null, path))}
     </>
   );
 };

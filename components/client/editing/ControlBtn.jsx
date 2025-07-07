@@ -1,6 +1,6 @@
 'use client'
 
-import { Loader2, MoreVertical, X } from "lucide-react"
+import { ExternalLink, Link2, Loader2, MoreVertical, X } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 import UserFeedback from "./Feedback"
@@ -9,7 +9,7 @@ import { publishPortfolio } from "@/actions/user/publishPortfolio"
 import { toast } from "sonner"
 import CongratsCard from "../CongratsCard"
 
-const ControlBtn = ({ templateId }) => {
+const ControlBtn = ({ templateId, userName }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [openFeedback, setOpenFeedback] = useState(false)
     const [isProcessing, setIsProcessing] = useState(false)
@@ -17,6 +17,7 @@ const ControlBtn = ({ templateId }) => {
 
     // Get the templateData from store
     const templateData = useSelector(state => state.templateData)
+    const portfolioLink = `/${userName}/${templateId}`;
     
 
     // Function to handle leaving feedback
@@ -43,8 +44,6 @@ const ControlBtn = ({ templateId }) => {
         return;
       }
 
-      console.log('Portfolio published successfully:', res.data)
-
       // Show success(congrats) modal
       if (res.success) {
         setIsProcessing(false)
@@ -58,8 +57,8 @@ const ControlBtn = ({ templateId }) => {
         <CongratsCard 
           title="🎉 Portfolio Published!"
           message="Congratulations! Your portfolio is now live."
-          action1={{ label: "View Portfolio", href: `/` }}
-          action2={{ label: "Share Link", href: `/templates` }}
+          action1={{ label: "View Portfolio", href: `${portfolioLink}`, newTab: true, icon: <ExternalLink  className="w-4 h-4"/> }}
+          action2={{ label: "Share Link", href: `${portfolioLink}`, newTab: false, icon: <Link2  className="w-[17px] h-[17px]"/> }}
           onClose={() => setShowCongrats(false)}
         />
       )}

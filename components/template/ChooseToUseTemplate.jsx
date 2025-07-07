@@ -56,6 +56,7 @@ const ChooseToUseTemplate = ({ templateId }) => {
               <button onClick={handleUseTemplate} className="py-3">Use this template</button>
               <button className="py-3">Leave a feedback</button>
               <button className="py-3"><Link href={`/templates`}>Choose another template</Link></button>
+              <p className="">I just want to see my home again please... <Link href={'/'} className="text-blue-700 hover:underline hover:text-blue-600">Go home.</Link></p>
             </div>
           </div>
         </div>

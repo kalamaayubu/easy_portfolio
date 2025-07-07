@@ -15,7 +15,6 @@ const TemplateRender = ({ templateId, data }) => {
     }
   }, [data, templateId])
   
-  console.log('TEMPLATE RENDER:', data)
   return (
     <div className="">
       { data?.sections?.map((section) => (

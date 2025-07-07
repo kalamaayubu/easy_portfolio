@@ -8,7 +8,7 @@ import Link from "next/link";
 const CongratsCard = ({ title, message, action1, action2, onClose}) => {
   useEffect(() => {
     confetti({
-      particleCount: 500,
+      particleCount: 400,
       spread: 70,
       origin: { y: 0.6 },
       gravity: 0.6,
@@ -30,18 +30,26 @@ const CongratsCard = ({ title, message, action1, action2, onClose}) => {
         <h2 className="text-2xl font-bold text-green-600">{title}</h2>
         <p className="text-gray-500 mt-4">{message}</p>
         <div className="flex items-center justify-center gap-4 mt-6">
-          <Link href={action1.href}>
-            <button className="px-5 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600">
+          <Link 
+            href={action1.href} 
+            target={action1.newTab ? "_blank" : "_self"}
+            rel={action1.newTab ? "noopener noreferrer" : undefined}
+          >
+            <button className="px-5 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 flex items-center gap-2">
               {action1.label}
+              {action1.icon && action1.icon}
             </button>
           </Link>
         
-          <Link href={action2.href}>
-            <button className="hover:scale-95 text-black bg-white border rounded-xl px-5">
-              <span className="flex items-center gap-2">
-                <LinkIcon className="w-[14px]"/> {action2.label}
-              </span>
-            </button>
+          <Link 
+            href={action2.href} 
+            target={action2.newTab ? "_blank" : "_self"}
+            rel={action2.newTab ? "noopener noreferrer" : undefined}
+          >
+              <button className="hover:scale-95 text-black bg-white border rounded-xl px-5 flex items-center gap-2">
+                {action2.icon && action2.icon}
+                {action2.label}
+              </button>
           </Link>
         </div>
       </div>

@@ -18,6 +18,8 @@ export default async function TemplateDetailsPage({ params }) {
         return <p>Error fetching template details... Please try again later</p>
     }
 
+    console.log('TemplateDetailsPage data:', data)
+
     return (
         <div className="relative">
             <ChooseToUseTemplate templateId={templateId}/>

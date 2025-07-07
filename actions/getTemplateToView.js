@@ -24,6 +24,5 @@ export async function getTemplateToView(userName, templateId) {
     }
 
     // Return the fetched template data
-    console.log('Fetched template data:PUBLIC:', data)
     return { data }
 }

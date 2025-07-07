@@ -2,6 +2,7 @@
 
 import { CloudLightningIcon, GraduationCap, Share2Icon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const ProblemSolution = () => {
   return (
@@ -14,10 +15,11 @@ const ProblemSolution = () => {
               <h1 className="text-[30px] sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">When Sharing Projects Feels Like a Project</h1>
               <p className="text-gray-500 text-xl mb-4 w-[95%] lg:w-full max-w-[500px] xl:max-w-[550px]">
                 Building a dev portfolio sounds easy — until it's not.
-You end up knee-deep in code, layout tweaks, and deployment configs.
-You’re either stuck with clunky templates or forced to learn tools you don’t need.
-It’s frustrating.
+                You end up knee-deep in code, layout tweaks, and deployment configs.
+                You’re either stuck with clunky templates or forced to learn tools you don’t need.
+                It’s frustrating.
               </p>
+              <button className="max-w-[300px] justify-center mt-4 lg:flex hidden rounded-b-xl py-3"><Link href={'/templates'}>Create Your Portfolio Now</Link></button>
             </div>
             <div className="">
               <Image
@@ -40,10 +42,13 @@ It’s frustrating.
               className="w-[90%] lg:hidden max-w-[400px] m-auto h-auto rounded-xl mb-4"
             />
           </div>
-          <p className="text-gray-500 lg:hidden text-xl mb-4 w-[95%] text-center max-w-[600px] m-auto">
-            Building a dev portfolio sounds easy — until you’re knee-deep in code, layout tweaks, and deployment configs.
-            You’re either customizing clunky templates, learning tools you don’t need. It’s just frustrating.
-          </p>
+          <div className="lg:hidden mb-4 w-[95%] text-center max-w-[600px] m-auto">
+            <p className="text-gray-500 text-xl">
+              Building a dev portfolio sounds easy — until you’re knee-deep in code, layout tweaks, and deployment configs.
+              You’re either customizing clunky templates, learning tools you don’t need. It’s just frustrating.
+            </p>
+            <button className="max-w-[300px] justify-center mt-4"><Link href={'/templates'}>Create Your Portfolio Now</Link></button>
+          </div>
         </div>
         <div>
         </div>

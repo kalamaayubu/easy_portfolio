@@ -16,7 +16,9 @@ export default async function PortfolioPage({ params }) {
     )
   }
 
+    const [template] = data
+
     return (
-        <TemplateRender templateId={templateId} data={data.template_body} />
+        <TemplateRender templateId={templateId} data={template.template_body} />
     )
 }

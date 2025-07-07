@@ -15,6 +15,7 @@ const LogoutBtn = () => {
         await logout(); // Call the logout server action
 
         // Redirect user to login page or home
+        router.refresh() // Refresh the page to update the state
         router.push('/')
         setIsProcessing(false)
     }

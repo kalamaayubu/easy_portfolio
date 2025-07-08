@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import RenderFields from "./RenderFields";
+import TemplateControls from "./TemplateControls";
 
 const SectionEditorDrawer = ({ section, onClose, onSave }) => {
   const [formData, setFormData] = useState({});
@@ -30,6 +31,13 @@ const SectionEditorDrawer = ({ section, onClose, onSave }) => {
       >
         Save Changes
       </button>
+
+      {/* Render section controls(Add/remove) */}
+      <TemplateControls 
+        section={section} 
+        formData={formData} 
+        setFormData={setFormData}
+      />
 
       {/* Render dynamic editable fields */}
       <RenderFields data={formData} onChange={setFormData} />

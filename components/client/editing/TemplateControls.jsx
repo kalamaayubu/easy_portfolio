@@ -2,7 +2,7 @@
 
 import { addItemToSection, removeItemFromSection } from "@/utils/templateEditingControls";
 
-const TemplateControls = ({ section, formData, setFormData}) => {
+const TemplateControls = ({ section, formData, setFormData, scrollRef }) => {
   if (!section?.id) return null;
 
   const controls = {
@@ -28,12 +28,21 @@ const TemplateControls = ({ section, formData, setFormData}) => {
   return (
     <div className="flex justify-between items-center mb-4">
         <button
-            onClick={() => addItemToSection({
-                section,
-                path: control.path,
-                defaultItem: control.defaultItem,
-                onChange: setFormData,
-            })}
+            onClick={() => {
+                addItemToSection({
+                    section,
+                    path: control.path,
+                    defaultItem: control.defaultItem,
+                    onChange: setFormData,
+                })  
+
+                // Scroll to the bottom after adding a new item
+                setTimeout(() => {
+                    if (scrollRef?.current) {
+                        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+                    }
+                }, 100);
+            }}
             className="text-sm bg-green-600 text-white px-3 py-1 rounded"
         >
             ➕

@@ -9,16 +9,19 @@ export async function submitFeedback(content, templateId) {
 
     // Get userId from cookies
     const userData = await getUser()
-    const id = userData?.user.id
+    const userId = userData?.user.id
 
     // If user id are not available, insert into the anonymous_feedback table
-    if (!id) {
+    if (!userId) {
         const { data: anonymousFeedbackData, error: anonymousFeedbackError} = await supabase
             .from('anonymous_feedback')
-            .insert([{ content }])
+            .insert([{ content, on_template: templateId }])
+            .select()
+
+            console.log("Feedback submitted anonymously:", anonymousFeedbackData)
 
         if (anonymousFeedbackError) {
-            console.error("Error publishing anonymous feedback")
+            console.error("Error publishing anonymous feedback", anonymousFeedbackError)
             return { success: false, error: anonymousFeedbackError.message }
         }
 
@@ -27,7 +30,7 @@ export async function submitFeedback(content, templateId) {
 
     const { data, error } = await supabase
         .from('feedbacks')
-        .insert([{ content, user_id: id, on_template: templateId }])
+        .insert([{ content, user_id: userId, on_template: templateId }])
         .select()
         .single()
 

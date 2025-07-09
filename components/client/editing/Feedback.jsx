@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 
-const UserFeedback = ({ setIsOpen, isOpen, templateId }) => {
+const UserFeedback = ({ setIsOpen, isOpen, templateId, requireAuth = true }) => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [feedbackText, setFeedbackText] = useState("");
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -16,6 +16,8 @@ const UserFeedback = ({ setIsOpen, isOpen, templateId }) => {
 
     // Check if user is authenticated
     useEffect(() => {
+        if (!requireAuth) return; // If authentication is not required, skip this check
+
         const checkAuthentication = async () => {
             const userData = await getUser()
             if (userData?.user) {
@@ -28,7 +30,7 @@ const UserFeedback = ({ setIsOpen, isOpen, templateId }) => {
         }
 
         checkAuthentication();
-    }, [isAuthenticated])
+    }, [requireAuth])
 
     const handleSubmitFeedback = async () => {
         if (!feedbackText.trim()) return;
@@ -54,7 +56,7 @@ const UserFeedback = ({ setIsOpen, isOpen, templateId }) => {
     }
 
      // Don't render if user is not authenticated
-    if (!isAuthenticated) return null
+    if (requireAuth && !isAuthenticated) return null
 
   return (
     <div className={`z-50 fixed inset-0 bg-black bg-opacity-85 backdrop:blur-3xl`}>

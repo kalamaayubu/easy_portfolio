@@ -8,16 +8,18 @@ import { useSelector } from "react-redux"
 import { publishPortfolio } from "@/actions/user/publishPortfolio"
 import { toast } from "sonner"
 import CongratsCard from "../CongratsCard"
+import ShareDrawer from "@/components/ShareDrawer"
 
 const ControlBtn = ({ templateId, userName }) => {
-    const [isOpen, setIsOpen] = useState(false)
-    const [openFeedback, setOpenFeedback] = useState(false)
-    const [isProcessing, setIsProcessing] = useState(false)
-    const [showCongrats, setShowCongrats] = useState(false);
+    const [isOpen, setIsOpen] = useState(false) // Dropdown state
+    const [openFeedback, setOpenFeedback] = useState(false) // Feedback modal state
+    const [isProcessing, setIsProcessing] = useState(false) // Processing state for publish action
+    const [showCongrats, setShowCongrats] = useState(false); // Congrats modal state
+    const [showShareDrawer, setShowShareDrawer] = useState(false) // Share drawer state
 
     // Get the templateData from store
     const templateData = useSelector(state => state.templateData)
-    const portfolioLink = `/${userName}/${templateId}`;
+    const portfolioLink = `${location.origin}/${userName}/${templateId}`;
     
 
     // Function to handle leaving feedback
@@ -53,15 +55,46 @@ const ControlBtn = ({ templateId, userName }) => {
     }
   return (
     <>
+      {/* Congrats modal */}
       {showCongrats && (
         <CongratsCard 
           title="🎉 Portfolio Published!"
           message="Congratulations! Your portfolio is now live."
-          action1={{ label: "View Portfolio", href: `${portfolioLink}`, newTab: true, icon: <ExternalLink  className="w-4 h-4"/> }}
-          action2={{ label: "Share Link", href: `${portfolioLink}`, newTab: false, icon: <Link2  className="w-[17px] h-[17px]"/> }}
+          action1={{ 
+            label: "View Portfolio", 
+            href: `${portfolioLink}`, 
+            newTab: true, 
+            icon: <ExternalLink  className="w-4 h-4"/> 
+          }}
+          action2={{ 
+            label: "Share Link", 
+            href: `#`, 
+            newTab: false, 
+            icon: <Link2  className="w-[17px] h-[17px]"/>, 
+            // Close the modal and open share drawer
+            onClick: () => {
+              setShowCongrats(false);
+              setShowShareDrawer(true);
+            }
+          }}
           onClose={() => setShowCongrats(false)}
         />
       )}
+
+      {/* Share Drawer */}
+      {showShareDrawer && (
+        <ShareDrawer 
+          link={portfolioLink} 
+          onClose={() => {
+            setShowShareDrawer(false)
+            setTimeout(() => {
+              setShowCongrats(true);
+            }, 50); // Reopen(keep open) the congrats modal since user might want to do something else after canceling share drawer
+          }
+        }/>
+      )}
+
+      {/* Floating MoreVertical button */}
       <div className="fixed size-10 sm:size-11 lg:size-12 bg-blue-700 top-24 z-40 left-2 shadow-lg shadow-gray-900 bg-opacity-80 backdrop:blur-3xl lg:left-4 rounded-full flex items-center justify-center text-white hover:bg-opacity-100">
         <MoreVertical onClick={() => setIsOpen(prev => !prev)}  className="scale-50 active:scale-75 hover:cursor-pointer w-full h-full transition-all duration-300"/>
       </div>

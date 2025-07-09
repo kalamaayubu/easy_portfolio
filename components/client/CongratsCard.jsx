@@ -41,16 +41,16 @@ const CongratsCard = ({ title, message, action1, action2, onClose}) => {
             </button>
           </Link>
         
-          <Link 
-            href={action2.href} 
-            target={action2.newTab ? "_blank" : "_self"}
-            rel={action2.newTab ? "noopener noreferrer" : undefined}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              action2.onClick?.();
+            }}
+            className="hover:scale-95 text-black bg-white border rounded-xl px-5 flex items-center gap-2"
           >
-              <button className="hover:scale-95 text-black bg-white border rounded-xl px-5 flex items-center gap-2">
-                {action2.icon && action2.icon}
-                {action2.label}
-              </button>
-          </Link>
+            {action2.icon && action2.icon}
+            {action2.label}
+          </button>
         </div>
       </div>
     </div>

@@ -5,16 +5,28 @@ import { Loader2, MoreVertical, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import UserFeedback from "../client/editing/Feedback";
 
 const ChooseToUseTemplate = ({ templateId }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [openFeedback, setOpenFeedback] = useState(false)
+
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isRedirectingToLogin, setIsRedirectingToLogin] = useState(false)
+
   const router = useRouter()
 
   // Function to toggle the dropdown for choosing whether to use a template
   const handleMoreHorizontal = () => {
     setIsOpen(prev => !prev)
+  }
+
+  // Function to handle leaving feedback
+  const handleLeaveFeedback = () => {
+      setIsOpen(false); // Close the dropdown after clicking
+      setOpenFeedback(true); // Open the feedback modal
+      console.log("Feedback modal opened for template:", templateId);
+      return
   }
 
   // Function to use the selected template
@@ -41,6 +53,16 @@ const ChooseToUseTemplate = ({ templateId }) => {
       <div className="fixed size-10 sm:size-11 lg:size-12 bg-blue-700 top-24 z-40 left-2 shadow-lg shadow-gray-900 bg-opacity-80 backdrop:blur-3xl lg:left-4 rounded-full flex items-center justify-center text-white hover:bg-opacity-100">
         <MoreVertical onClick={handleMoreHorizontal} className="scale-50 active:scale-75 hover:cursor-pointer w-full h-full transition-all duration-300"/>
       </div>
+
+      {/* The feedback modal */}
+      {openFeedback && (
+        <UserFeedback 
+          setIsOpen={setOpenFeedback} 
+          isOpen={openFeedback} 
+          templateId={templateId} 
+          requireAuth={false}
+        />
+      )}
       
       {/* small screen dropdown */}
       {isOpen && (
@@ -54,7 +76,7 @@ const ChooseToUseTemplate = ({ templateId }) => {
             <h3 className="text-2xl font-bold mb-4">Are you looking to?</h3>
             <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 max-w-[600px] m-auto w-full">
               <button onClick={handleUseTemplate} className="py-3">Use this template</button>
-              <button className="py-3">Leave a feedback</button>
+              <button onClick={handleLeaveFeedback} className="py-3">Leave a feedback</button>
               <button className="py-3"><Link href={`/templates`}>Choose another template</Link></button>
               <p className="">I just want to see my home again please... <Link href={'/'} className="text-blue-700 hover:underline hover:text-blue-600">Go home.</Link></p>
             </div>

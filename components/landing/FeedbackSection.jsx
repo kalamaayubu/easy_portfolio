@@ -2,7 +2,6 @@
 
 import { submitFeedback } from "@/actions/user/submitFeedback"
 import Image from "next/image"
-import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
@@ -13,18 +12,20 @@ const FeedbackSection = () => {
         reset,
         formState: { errors, isSubmitting }
     } = useForm()
-    const [message, setMessage] = useState("")
 
     const onSubmit = async (data) => {
         try {
-            await submitFeedback(data.feedback)
-            setMessage("✅ Feedback submitted successfully!")
-            toast.success('Feedback submitted successfully!')
-            reset()
+            const res = await submitFeedback(data.feedback)
+            if(!res.success) {
+                toast.error('Shiet! Something went wrong while submitting feedback')
+                return
+            } 
+
+            toast.success( res.message || 'Thank you for the feedback, we are working to provide the best experience.')
+            return reset()
         } catch (err) {
             console.error(err)
-            setMessage("❌ Failed to submit. Try again.")
-            toast.error('Something went wrong while submitting feedback')
+            toast.error('Shiet! Something went wrong while submitting feedback')
         }
     }
 

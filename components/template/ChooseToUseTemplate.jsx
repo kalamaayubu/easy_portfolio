@@ -33,6 +33,7 @@ const ChooseToUseTemplate = ({ templateId }) => {
   const handleUseTemplate = async () => {
     // Check if user is authenticated
     const user = await getUser()
+    console.log("User in ChooseToUseTemplate:", user)
 
     if (!user) {
       /* Redirect to login with a flag to show that the request for login is
@@ -45,7 +46,7 @@ const ChooseToUseTemplate = ({ templateId }) => {
     }
 
     // If user is already loged in, redirect them to the template editing page
-    return router.push(`/user/edit-template/${templateId}`)
+    return router.push(`/user/edit_template/${templateId}`)
   }
 
   return (

@@ -1,4 +1,8 @@
 const ProjectCard = ({ title, description, image, link }) => {
+  // If any of the props are missing, don't render the card
+  if (!title || !description || !image || !link) {
+    return null;
+  }
   return (
     <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300">
       {image && (

@@ -5,7 +5,7 @@ const HeroCenter = ({ heading, call_to_action1, call_to_action2, description, im
       id="home"
       className="relative"
       style={{
-        backgroundImage: `url("/assets/bgimg2.avif")`,
+        backgroundImage: `url("/assets/bg.jpg")`,
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",

@@ -21,6 +21,7 @@ const TemplatesPage = async () => {
   
   return (
     <div className="relative m-auto">
+      <div className="blur-div"/> 
       <h1 className="text-black text-center text-4xl md:text-5xl mb-10 max-w-[800px] m-auto">Choose a template</h1>
       <div className="flex gap-3 sm:gap-5 md:gap-6 flex-wrap items-center justify-center mb-20">
       {templates?.map((templateData) => (

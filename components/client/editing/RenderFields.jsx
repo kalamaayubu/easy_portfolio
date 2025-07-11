@@ -21,17 +21,66 @@ const RenderFields = ({ data, onChange, path = "" }) => {
     const normalizedPath = fullPath.replace(/\[\d+\]/g, ""); // Remove array index from path eg [0], [1], etc.
     const label = fieldLabels[normalizedPath] || fieldLabels[key] || normalizedPath;
 
-    // Render string or number as a text input
+    // Render string or number as a text input and image as file input
     if (typeof value === "string" || typeof value === "number") {
+      const isImageField =
+        key.toLowerCase().includes("image") ||
+        key.toLowerCase().includes("logo") ||
+        key.toLowerCase().includes("avatar") ||
+        /\.(jpg|jpeg|png|gif|webp|svg|avif)$/i.test(value);
+
+      const isLongText = 
+        key.toLowerCase().includes("description") ||
+        key.toLowerCase().includes("content");
+
+        console.log("Image Field Check:", isImageField);
+
       return (
         <div key={fullPath} className="mb-4">
-          <label className="text-sm text-gray-600">{label}</label>
-          <input
-            type="text"
-            value={value ?? ""}
-            onChange={(e) => handleChange(fullPath, e.target.value)}
-            className="w-full px-3 py-2 border rounded mt-1"
-          />
+          <label className="text-sm text-gray-600 block mb-1">{label}</label>
+          {/* Render textarea for a long text */}
+          {isLongText ? (
+            <textarea
+              value={value ?? ""}
+              onChange={(e) => handleChange(fullPath, e.target.value)}
+              className="w-full h-fit px-3 py-2 border rounded"
+            />
+          ) : isImageField ? (
+            // Render file input for images
+            <>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+
+                  const reader = new FileReader();
+                  reader.onload = () => {
+                    if (reader.result) {
+                      handleChange(fullPath, reader.result);
+                    }
+                  };
+                  reader.readAsDataURL(file);
+                }}
+                className="w-full px-3 py-2 border rounded"
+              />
+              {value && (
+                <img
+                  src={value?.trim?.() || "/assets/heroBg2.jpg"}
+                  alt="preview"
+                  className="mt-2 max-w-full max-h-32 rounded-md border"
+                />
+              )}
+            </>
+          ) : (
+            <input
+              type="text"
+              value={value ?? ""}
+              onChange={(e) => handleChange(fullPath, e.target.value)}
+              className="w-full px-3 py-2 border rounded"
+            />
+          )}
         </div>
       );
     }

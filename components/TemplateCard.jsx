@@ -1,6 +1,5 @@
 "use client";
 
-import { ArrowRight, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -18,14 +17,14 @@ const TemplateCard = ({ templateData }) => {
   };
 
   return (
-    <div className="rounded-xl cursor-default flex flex-col max-w-96 relative transition-all duration-300 ease-in-out shadow-md border border-gray-100 hover:shadow-lg">
-      <div className="relative overflow-hidden rounded-t-xl">
+    <div className="rounded-xl group cursor-default flex flex-col max-w-96 relative transition-all duration-300 ease-in-out shadow-md border border-gray-200 hover:shadow-lg">
+      <div className="relative overflow-hidden rounded-t-xl group-hover:p-3 group-hover:pb-0 transition-all duration-500 ease-in-out">
         <Image
           src={"/assets/templatesScreenshorts/me.jpg"}
           width={1000}
           height={1000}
           alt="CardImage"
-          className="object-cover opacity-100 group-hover:opacity-90 transition-opacity duration-300 ease-in-out w-full h-full"
+          className="object-cover group-hover:rounded-xl rounded-t-xl transition-all duration-500 w-full h-full"
         />
       </div>
       <div className="flex flex-col gap-2 text-sm mb-2">
@@ -37,7 +36,7 @@ const TemplateCard = ({ templateData }) => {
         </p>
         <button
           onClick={handleSeeDetails}
-          className="max-w-24 p-0 ml-4 hover:translate-x-1 transition-all duration-300 group rounded-b-xl bg-white hover:animate-pulse flex items-center justify-between"
+          className="max-w-24 p-0 ml-4 hover:translate-x-1 transition-all duration-300 group/button rounded-b-xl bg-white hover:animate-pulse flex items-center justify-between"
         >
           <span className="text-sm purple-gradient-text">See details</span>
           <Image
@@ -45,14 +44,14 @@ const TemplateCard = ({ templateData }) => {
             width={20}
             height={20}
             alt="ChevronRight"
-            className="w-4 group-hover:hidden"  
+            className="w-4 group-hover/button:hidden"  
           />
           <Image
             src="/assets/icons/ArrowRight.svg"
             width={20}
             height={20}
             alt="ArrowRight"
-            className="w-4 hidden group-hover:flex" 
+            className="w-4 hidden group-hover/button:flex" 
           />
         </button>
       </div>

@@ -22,21 +22,28 @@ export default async function TemplateEditingPage({ params }) {
     .from("user_templates")
     .select("template_id")
     .eq("template_id", templateId)
-    .single();
+    .maybeSingle();
+
+
+  if (userError) {
+    console.error("Error fetching user templates:", userError);
+    return <div>Error loading user templates</div>;
+  }
 
   // If not in user_templates, fetch from templates table
-  if (!userTemplates || userError) {
+  if (!userTemplates) {
     const { data, error } = await supabase
     .from("templates")
-    .select(`
-      template_body, id,
-      profiles(username)
-    `)
+    .select(`template_body, id`)
     .eq("id", templateId)
-    .single();
+    .maybeSingle();
 
-    if (error || !data) {
-      return <div>Error loading template</div>;
+    if (error) {
+      console.error("Error fetching user template data:", error);
+      return <div>Error loading user template data</div>;
+    } else if (!data) {
+      console.error("Error fetching user template data:", error);
+      return <div>User template data failed to load</div>;
     }
 
     templateData = data;
@@ -48,15 +55,20 @@ export default async function TemplateEditingPage({ params }) {
       .eq("template_id", templateId)
       .single();
 
-    if (error || !data) {
-      return <div>Error loading user template</div>;
+    if (error) {
+      console.error("Error fetching user template data:", error);
+      return <div>Error loading user template data</div>;
+    }
+
+    if (!data) {
+      return <div>Template data failed to load</div>;
     }
 
     templateData= {
       id: data.template_id,
       template_body: data.template_body
     };
-    // console.log("From user_templates table:", templateData);
+    console.log("From user_templates table:", templateData);
   }
 
   return (

@@ -4,11 +4,22 @@ import _set from "lodash/set"; // Utility functions to safely set nested propert
 import _get from "lodash/get"; // Utility functions to safely get nested properties in an object
 import cloneDeep from "lodash/cloneDeep"; // Utility to create a deep copy of the data to prevent direct mutation
 import fieldLabels from "./fieldLabels";
+import { getUser } from "@/actions/auth/getUser";
+import { uploadImageToSupabase } from "@/utils/uploadImageToSupabase";
+import { useState } from "react";
+import { toast } from "sonner";
+import imageCompression from "browser-image-compression"; // Library to compress images in the browser
 
 const RenderFields = ({ data, onChange, path = "" }) => {
+    const [isUploading, setIsUploading] = useState(false); // 👈 Uploading state
+
   const handleChange = (fieldPath, value) => {
+    /* 
+      Create a deep copy of the data to avoid direct mutation to ensure reactivity
+      (react detects changes and re-render components) 
+    */
     const updated = cloneDeep(data);
-    _set(updated, fieldPath, value);
+    _set(updated, fieldPath, value); // Update a deeply nested field based on a string path
     onChange(updated);
   };
 
@@ -33,8 +44,7 @@ const RenderFields = ({ data, onChange, path = "" }) => {
         key.toLowerCase().includes("description") ||
         key.toLowerCase().includes("content");
 
-        console.log("Image Field Check:", isImageField);
-
+      // Render text input or textarea for long text
       return (
         <div key={fullPath} className="mb-4">
           <label className="text-sm text-gray-600 block mb-1">{label}</label>
@@ -51,20 +61,58 @@ const RenderFields = ({ data, onChange, path = "" }) => {
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => {
+                onChange={async (e) => {
                   const file = e.target.files?.[0];
                   if (!file) return;
 
-                  const reader = new FileReader();
-                  reader.onload = () => {
-                    if (reader.result) {
-                      handleChange(fullPath, reader.result);
-                    }
-                  };
-                  reader.readAsDataURL(file);
+                  // Check if the file is an image
+                  if (!file.type.startsWith("image/")) {
+                    toast.error("Please select a valid image file.");
+                    return;
+                  }
+
+                  // Try to compress the image before uploading
+                  const compressedFile = await imageCompression(file, {
+                    maxSizeMB: 0.8, // Compress to less than 800KB
+                    maxWidthOrHeight: 1920, // Resize to a maximum width or height of 1920px
+                    useWebWorker: true, // Use web worker for compression to avoid blocking the main thread
+                  });
+
+
+                  // Check the image size
+                  const imageSize = file.size / 1024; // Convert size to KB
+
+                  // Check if the file size is less than 800KB
+                  if (compressedFile.size > 800 * 1024) {
+                    toast.error(`Your image is ${Math.round(imageSize)}KB, which is too large, try with an image of size less than 800KB.`);
+                    return;
+                  }
+
+                  // Get user ID for the image path
+                  const data = await getUser();
+                  const userId = data?.user?.id
+
+                  try {
+                    setIsUploading(true)
+
+                    // Upload the image to Supabase and get the public URL
+                    const publicUrl = await uploadImageToSupabase(file, userId);
+                    handleChange(fullPath, publicUrl);
+                  } catch (error) {
+                    console.error("Error uploading image:", error);
+                    return;
+                  } finally {
+                    setIsUploading(false);
+                  }
                 }}
                 className="w-full px-3 py-2 border rounded"
               />
+
+              {/* 👇 Uploading Indicator */}
+              {isUploading && (
+                <p className="text-xs purple-gradient-text mt-2 animate-pulse">Uploading image...</p>
+              )}
+
               {value && (
                 <img
                   src={value?.trim?.() || "/assets/heroBg2.jpg"}
@@ -74,6 +122,7 @@ const RenderFields = ({ data, onChange, path = "" }) => {
               )}
             </>
           ) : (
+            // Render text input for regular strings or numbers
             <input
               type="text"
               value={value ?? ""}

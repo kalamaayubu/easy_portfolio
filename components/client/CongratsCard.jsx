@@ -8,11 +8,19 @@ import Link from "next/link";
 const CongratsCard = ({ title, message, action1, action2, onClose}) => {
   useEffect(() => {
     confetti({
-      particleCount: 400,
-      spread: 70,
+      particleCount: 300,
+      spread: 90,
       origin: { y: 0.6 },
-      gravity: 0.6,
+      gravity: 0.4,
       startVelocity: 50,
+      decay: 0.9,
+      disableForReducedMotion: true,
+      useWorker: true,
+      zIndex: 9999,
+      shapes: ['circle', 'square', 'triangle', 'heart'],
+      scalar: 0.8,
+      colors: ['#ff0', '#0f0', '#00f', '#f00', '#f0f', '#0ff'],
+      particleSpeed: 2,
     });
   }, []);
 

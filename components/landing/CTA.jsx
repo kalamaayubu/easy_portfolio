@@ -1,4 +1,5 @@
 import Link from "next/link"
+import CreatePortfolioBtn from "../CreatePortfolioBtn"
 
 const CTA = () => {
   return (
@@ -8,11 +9,7 @@ const CTA = () => {
         <p className=" mt-4 lg:mt-0 lg:ml-6 max-w-[500px] text-gray-500 text-[18px] lg:text-xl">
             Start building your portfolio and showcase your work to the world.
         </p>
-        <button className="px-6 py-3 whitespace-nowrap hover:shadow-lg hover:shadow-purple-900">
-            <Link href="/templates">
-            Create Your Portfolio Now
-            </Link>
-        </button>
+        <CreatePortfolioBtn/>
       </div>
     </div>
   )

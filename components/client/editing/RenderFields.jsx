@@ -53,7 +53,7 @@ const RenderFields = ({ data, onChange, path = "" }) => {
             <textarea
               value={value ?? ""}
               onChange={(e) => handleChange(fullPath, e.target.value)}
-              className="w-full h-fit px-3 py-2 border rounded"
+              className="w-full min-h-40 px-3 py-2 border rounded"
             />
           ) : isImageField ? (
             // Render file input for images
@@ -75,6 +75,7 @@ const RenderFields = ({ data, onChange, path = "" }) => {
                   const compressedFile = await imageCompression(file, {
                     maxSizeMB: 0.8, // Compress to less than 800KB
                     maxWidthOrHeight: 1920, // Resize to a maximum width or height of 1920px
+                    initialQuality: 0.8, // Initial quality for compression
                     useWebWorker: true, // Use web worker for compression to avoid blocking the main thread
                   });
 

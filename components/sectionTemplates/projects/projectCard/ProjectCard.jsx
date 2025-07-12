@@ -1,15 +1,22 @@
+import Image from "next/image";
+
 const ProjectCard = ({ title, description, image, link }) => {
   // If any of the props are missing, don't render the card
   if (!title || !description || !image || !link) {
     return null;
   }
+
+  const img = image || '/assets/heroBg1.jpg';
+
   return (
     <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition duration-300">
       {image && (
-        <img
-          src={`/assets/heroBg1.jpg`}
+        <Image
+          src={img}
           alt={title}
-          className="w-full h-40 object-cover rounded-md mb-3"
+          width={400}
+          height={200}
+          className="w-full h-60 object-cover rounded-md mb-3"
         />
       )}
       <h2 className="text-xl font-bold mb-2">{title}</h2>

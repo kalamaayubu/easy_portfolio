@@ -13,13 +13,10 @@ const CongratsCard = ({ title, message, action1, action2, onClose}) => {
       origin: { y: 0.6 },
       gravity: 0.4,
       startVelocity: 50,
-      decay: 0.9,
       disableForReducedMotion: true,
       useWorker: true,
-      zIndex: 9999,
-      shapes: ['circle', 'square', 'triangle', 'heart'],
       scalar: 0.8,
-      colors: ['#ff0', '#0f0', '#00f', '#f00', '#f0f', '#0ff'],
+      colors: ['#ff0', '#0f0', '#ffd700', '#00f', '#f00', '#f0f', '#ffd700', '#0ff', '#ff00ff', '#00ff00', '#ffd700', '#800080', '#ffa500', '#ff0000', '#ffd700'],
       particleSpeed: 2,
     });
   }, []);

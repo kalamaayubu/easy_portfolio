@@ -43,11 +43,11 @@ const TemplateControls = ({ section, formData, setFormData, scrollRef }) => {
                     }
                 }, 100);
             }}
-            className="text-sm bg-green-600 text-white px-3 py-1 rounded"
+            className="text-sm  bg-white border border-black hover:bg-black hover:text-white transition-all duration-300 text-black px-3 py-1 rounded-lg"
         >
-            ➕
+            + Add {control.label || "Item"}
         </button>
-        <button 
+        {/* <button 
             onClick={() => removeItemFromSection({
                 section,
                 path: control.path,
@@ -56,8 +56,8 @@ const TemplateControls = ({ section, formData, setFormData, scrollRef }) => {
             })}
             className="text-sm bg-red-500 text-white px-3 py-1 rounded"
         >
-            ❌
-        </button>
+            - Remove
+        </button> */}
     </div>
   )
 }

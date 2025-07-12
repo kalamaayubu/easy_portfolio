@@ -2,7 +2,7 @@
 
 import { ExternalLink, Link2, Loader2, MoreVertical, X } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import UserFeedback from "./Feedback"
 import { useSelector } from "react-redux"
 import { publishPortfolio } from "@/actions/user/publishPortfolio"
@@ -16,10 +16,18 @@ const ControlBtn = ({ templateId, userName }) => {
     const [isProcessing, setIsProcessing] = useState(false) // Processing state for publish action
     const [showCongrats, setShowCongrats] = useState(false); // Congrats modal state
     const [showShareDrawer, setShowShareDrawer] = useState(false) // Share drawer state
+    const [origin, setOrigin] = useState('') // Store the origin URL
+
+    // Get the current location origin on mount
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        setOrigin(window.location.origin);
+      }
+    }, []);
 
     // Get the templateData from store
     const templateData = useSelector(state => state.templateData)
-    const portfolioLink = `${location.origin}/${userName}/${templateId}`;
+    const portfolioLink = `${origin}/${userName}/${templateId}`;
     
 
     // Function to handle leaving feedback
@@ -62,7 +70,7 @@ const ControlBtn = ({ templateId, userName }) => {
           message="Congratulations! Your portfolio is now live."
           action1={{ 
             label: "View Portfolio", 
-            href: `${portfolioLink}`, 
+            href: origin ? `${portfolioLink}` : '#', 
             newTab: true, 
             icon: <ExternalLink  className="w-4 h-4"/> 
           }}

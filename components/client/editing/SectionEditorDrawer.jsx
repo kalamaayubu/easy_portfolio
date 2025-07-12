@@ -23,12 +23,12 @@ const SectionEditorDrawer = ({ section, onClose, onSave }) => {
     <div ref={scrollRef} className="fixed top-0 right-0 w-[350px] max-w-full h-screen bg-white shadow-lg z-[999] px-6 py-4 pb-10 overflow-y-auto">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-bold">Edit Section: {section?.id}</h2>
-        <button onClick={onClose} className="hover:bg-red-600 rounded-md px-[10px] py-1">✕</button>
+        <button onClick={onClose} className="p-0 bg-white text-gray-500 hover:text-black">✕</button>
       </div>
 
       <button
         onClick={handleSubmit}
-        className="bg-blue-600 text-white px-4 py-2 mb-4 rounded w-full"
+        className="px-4 py-2 mb-4 w-full"
       >
         Save Changes
       </button>

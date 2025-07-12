@@ -6,7 +6,7 @@ const Footer = () => {
           © {new Date().getFullYear()} Easy Portfolio. All rights reserved.
         </p>
         <p className="text-gray-500 text-xs mt-2">
-          Made with ❤️ by Easy portfolio team
+          Build with ❤️ by Easy portfolio team
         </p>
       </div>
 

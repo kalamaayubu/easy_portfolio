@@ -11,9 +11,6 @@ const TemplateCard = ({ templateData }) => {
   
   const handleSeeDetails = () => {
     router.push(`/templates/${id}`);
-    
-    // Scroll to the top of the page
-    // window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (

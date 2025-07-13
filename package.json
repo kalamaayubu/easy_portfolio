@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@codinix/device-mockup": "^1.0.7",
     "@reduxjs/toolkit": "^2.8.2",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.49.8",

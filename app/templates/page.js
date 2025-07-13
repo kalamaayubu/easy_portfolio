@@ -20,16 +20,20 @@ const TemplatesPage = async () => {
   console.log(`Templates: ${templates}`)
   
   return (
-    <div className="relative m-auto">
+    <>
       <div className="blur-div"/> 
-      <h1 className="text-black text-center text-4xl md:text-5xl mb-10 max-w-[800px] m-auto">Choose a template</h1>
-      <div className="flex gap-3 sm:gap-5 md:gap-6 flex-wrap items-center justify-center mb-20">
-      {templates?.map((templateData) => (
-        <TemplateCard key={templateData.id} templateData={templateData} />
-      ))}
+      <div className="relative m-auto max-w-7xl w-[80%]">
+        <h1 className="text-black text-center text-4xl md:text-5xl mb-10 max-w-[800px] m-auto">Choose a template</h1>
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 max-w-[12800px] md:grid-cols-2 xl:grid-cols-3 justify-items-center m-auto gap-4 xl:gap-6">
+            {templates?.map((templateData) => (
+              <TemplateCard key={templateData.id} templateData={templateData} />
+            ))}
+          </div>
+        </div>
       </div>
       <Footer/>
-    </div>
+    </>
   )
 }
 

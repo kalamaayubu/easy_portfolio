@@ -38,16 +38,18 @@ const NavBar = () => {
   if (dontShowNavBar ) return null;
 
   return (
-    <section className="sticky z-50 flex items-center justify-self-center justify-between w-[88%] max-w-[650px] bg-gray-200 bg-opacity-90 backdrop-blur-sm px-3 top-6 rounded-xl p-1 bottom-0 gap-10 mb-10 sm:mb-12 md:mb-14 lg:mb-16">
+    <>
+    {/* Sticky NavBar */}
+    <section className="sticky z-50 flex items-center justify-self-center justify-between w-[88%] max-w-[650px] bg-gray-200 bg-opacity-90 backdrop-blur-sm px-3 top-6 rounded-xl py-4 bottom-0 gap-10 mb-10 sm:mb-12 md:mb-14 lg:mb-16">
       <div className="items-center align-self-start flex">
         <Image
           src={"/assets/EP.png"}
           width={1000}
           height={1000}
           alt="Logo"
-          className="w-10"
+          className="w-10 -rotate-90"
         />
-        <span className="font-bold text-[20px] hidden sm:flex">
+        <span className=" text-[18px] font-bold purple-gradient-text italic hidden sm:flex">
           Easy Portfolio
         </span>
       </div>
@@ -73,6 +75,7 @@ const NavBar = () => {
         )}
       </nav>
     </section>
+    </>
   );
 };
 

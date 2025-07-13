@@ -58,16 +58,19 @@ const ProblemSolution = () => {
       {/* The solution section */}
       <div className="flex flex-col m-auto gap-6 lg:flex-row lg:w-full lg:justify-between lg:m-auto lg:gap-8 xl:gap-12 mt-10 lg:mt-14">
           <h1 className="text-[30px] lg:hidden text-center m-auto sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">Showcase Your Work, Without the Struggle</h1>
-          <div className="relative w-[85%] max-w-[450px] bg-white shadow-xl p-6 lg:p-4 m-auto rounded-2xl overflow-hidden group">
-            <video
-              src="/assets/videos/solutionVid.mp4" // ✅ your actual video path
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="rounded-xl w-full h-auto"
-          />
-          </div>
+          {/* Video presentation */}
+            <div className="relative w-[85%] border-[10px] border-black max-w-[450px] rounded-3xl m-auto overflow-hidden rounded-fu rounded-b-none border-b-0">
+              <video
+                src="/assets/videos/solutionVid.mp4" // ✅ your actual video path
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-auto"
+            />
+            {/* <div className="absolute w-24 rounded-full h-3 bg-black top-4 left-28 m-auto"/> */}
+            </div>
+
           <div className="flex flex-col">
               <h1 className="text-[30px] hidden lg:flex sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">Showcase Your Work, Without the Struggle</h1>
             <p className="text-gray-500 text-xl m-auto lg:m-0 text-center lg:text-start max-w-[500px] xl:max-w-[550px] px-2">

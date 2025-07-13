@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const TestimonialCard = ({ testimonial, testimonailPic, name, occupation}) => {
   return (
-    <div className="border p-4 px-6 rounded-xl flex flex-col max-w-[400px] bg-white">
+    <div className="border p-4 cursor-default px-6 rounded-xl flex flex-col max-w-[400px] bg-white">
         <Quote/>
         <p className="text-gray-500 mb-3">{testimonial}</p>
         <div className="flex gap-4 items-center">

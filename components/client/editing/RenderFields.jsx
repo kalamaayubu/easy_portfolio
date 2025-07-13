@@ -9,9 +9,14 @@ import { uploadImageToSupabase } from "@/utils/uploadImageToSupabase";
 import { useState } from "react";
 import { toast } from "sonner";
 import imageCompression from "browser-image-compression"; // Library to compress images in the browser
+import { useParams } from "next/navigation";
 
 const RenderFields = ({ data, onChange, path = "" }) => {
     const [isUploading, setIsUploading] = useState(false); // 👈 Uploading state
+    const params = useParams(); // Get the current URL parameters
+    const templateId = params?.templateId; // Extract templateId from the URL parameters
+
+    // Get templateId from the current URL
 
   const handleChange = (fieldPath, value) => {
     /* 
@@ -65,9 +70,19 @@ const RenderFields = ({ data, onChange, path = "" }) => {
                   const file = e.target.files?.[0];
                   if (!file) return;
 
-                  // Check if the file is an image
-                  if (!file.type.startsWith("image/")) {
-                    toast.error("Please select a valid image file.");
+                  // Define allowed mime types
+                  const allowedMimeTypes = [
+                    "image/jpeg",
+                    "image/png",
+                    "image/gif",
+                    "image/webp",
+                    "image/svg+xml",
+                    "image/avif"
+                  ];
+
+                  // Check if the file type is allowed
+                  if (!allowedMimeTypes.includes(file.type)) {
+                    toast.error("Please select a valid image file (jpg, png, gif, webp, svg, avif).");
                     return;
                   }
 
@@ -79,7 +94,6 @@ const RenderFields = ({ data, onChange, path = "" }) => {
                     useWebWorker: true, // Use web worker for compression to avoid blocking the main thread
                   });
 
-
                   // Check the image size
                   const imageSize = file.size / 1024; // Convert size to KB
 
@@ -89,18 +103,31 @@ const RenderFields = ({ data, onChange, path = "" }) => {
                     return;
                   }
 
-                  // Get user ID for the image path
+                  // Get the parameters needed for the upload
                   const data = await getUser();
-                  const userId = data?.user?.id
+                  const userId = data?.user?.id;
+                  const sectionId = fullPath.split(".")[0];
+                  const imageKey = fullPath.split(".").pop();
 
                   try {
                     setIsUploading(true)
 
                     // Upload the image to Supabase and get the public URL
-                    const publicUrl = await uploadImageToSupabase(file, userId);
+                    const publicUrl = await uploadImageToSupabase(
+                      file, 
+                      userId, 
+                      templateId, 
+                      sectionId, 
+                      imageKey
+                    );
                     handleChange(fullPath, publicUrl);
                   } catch (error) {
-                    console.error("Error uploading image:", error);
+                    const message = error.message || "Shiet! an error occurred while uploading the image.";
+                    if (message.includes("maximum allowed size")) {
+                      toast.error("Upload failed: Image size exceeds the maximum allowed size of 800KB.");
+                    } else {
+                      toast.error(message || "Something went wrong during upload.");
+                    }
                     return;
                   } finally {
                     setIsUploading(false);

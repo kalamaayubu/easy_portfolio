@@ -2,22 +2,22 @@
 
 import { useEffect } from "react";
 import confetti from "canvas-confetti";
-import { Link as LinkIcon, X } from "lucide-react";
+import { X } from "lucide-react";
 import Link from "next/link";
 
 const CongratsCard = ({ title, message, action1, action2, onClose}) => {
   useEffect(() => {
     confetti({
-      particleCount: 300,
-      spread: 90,
+      particleCount: 400,
+      spread: 70,
       origin: { y: 0.6 },
-      gravity: 0.4,
+      gravity: 0.5,
       startVelocity: 50,
       disableForReducedMotion: true,
       useWorker: true,
-      scalar: 0.8,
+      scalar: 1,
       colors: ['#ff0', '#0f0', '#ffd700', '#00f', '#f00', '#f0f', '#ffd700', '#0ff', '#ff00ff', '#00ff00', '#ffd700', '#800080', '#ffa500', '#ff0000', '#ffd700'],
-      particleSpeed: 2,
+      particleSpeed: 1,
     });
   }, []);
 

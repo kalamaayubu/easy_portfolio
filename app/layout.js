@@ -4,7 +4,7 @@ import ReduxProvider from "@/components/client/ReduxProvider";
 import { Toaster } from "sonner";
 
 export const metadata = {
-  title: 'My App',
+  title: 'EasyPortfolioo',
   description: 'This is my app description',
 }
 

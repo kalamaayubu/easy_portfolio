@@ -21,7 +21,7 @@ const TestimonialSection = () => {
                 <TestimonialCard 
                     name={'Zahra Al-Mansouri'} 
                     occupation={'Product Designer'} 
-                    testimonial={'For someone outside traditional dev workflows, it was refreshing to find a setup I could navigate and present my profile without technical overhead.'} 
+                    testimonial={'As someone managing products, I needed a quick way to showcase side projects. This did the job amazingly.'} 
                     testimonailPic={"/assets/testimonials/siz.jpg"}
                 />
                 <TestimonialCard 

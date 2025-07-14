@@ -32,5 +32,5 @@ export const uploadImageToSupabase = async (file, userId, templateId, sectionId,
         .from("user-templates.images")
         .getPublicUrl(filePath);
 
-    return data.publicUrl
+    return `${data.publicUrl}?t=${Date.now()}`;
 }

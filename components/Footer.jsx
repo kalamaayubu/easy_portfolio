@@ -11,7 +11,8 @@ const Footer = () => {
           <div className="flex items-end">
             <Image 
               height={200} 
-              width={200} 
+              width={200}
+              alt="Easy Portfolio Logo" 
               src={'/assets/EP.png'} 
               className="w-28 -rotate-90"
             />

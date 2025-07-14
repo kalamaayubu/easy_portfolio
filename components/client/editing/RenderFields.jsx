@@ -10,6 +10,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import imageCompression from "browser-image-compression"; // Library to compress images in the browser
 import { useParams } from "next/navigation";
+import { convertToWebP } from "@/utils/convertToWebp";
 
 const RenderFields = ({ data, onChange, path = "" }) => {
     const [isUploading, setIsUploading] = useState(false); // 👈 Uploading state
@@ -106,21 +107,33 @@ const RenderFields = ({ data, onChange, path = "" }) => {
                   // Get the parameters needed for the upload
                   const data = await getUser();
                   const userId = data?.user?.id;
-                  const sectionId = fullPath.split(".")[0];
-                  const imageKey = fullPath.split(".").pop();
+                  const sectionId = fullPath.split(".")[0].replace(/\[\d+\]/g, ""); // Get the section name from the path, excluding any array index
+
+                  // Get image key dynamically
+                  const lastProp = fullPath.split(".").pop(); // Get the last part of the path
+                  const indexMatch = fullPath.match(/\[(\d+)\]/); // ["[2]", "2"]
+                  const index = indexMatch ? indexMatch[1] : null; // Extract the index if it exists
+                  const imageKey = index !== null 
+                    ? `${lastProp}-${index}` // "image-2"
+                    : lastProp; // "image"
 
                   try {
                     setIsUploading(true)
 
+                    // Convert to WebP
+                    const webpFile = await convertToWebP(compressedFile);
+
                     // Upload the image to Supabase and get the public URL
                     const publicUrl = await uploadImageToSupabase(
-                      file, 
+                      compressedFile, 
                       userId, 
                       templateId, 
                       sectionId, 
                       imageKey
                     );
+
                     handleChange(fullPath, publicUrl);
+                    toast.success("Image uploaded successfully!");
                   } catch (error) {
                     const message = error.message || "Shiet! an error occurred while uploading the image.";
                     if (message.includes("maximum allowed size")) {

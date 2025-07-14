@@ -7,18 +7,20 @@ const Footer = () => {
     <>
     <div id="footer" className="w-full bg-gray-200 mt-20 p-4 pb-0 px-0 lg:pb-4">
       <div className="max-w-[1280px] m-auto flex flex-col">
-        <div className="flex flex-col lg:items-start mb-20">
-          <div className="flex items-end">
-            <Image 
-              height={200} 
-              width={200}
-              alt="Easy Portfolio Logo" 
-              src={'/assets/EP.png'} 
-              className="w-28 -rotate-90"
+        <div className="flex flex-col lg:items-start mb-20 ml-3">
+          <div className="items-center flex">
+            <Image
+                src={"/assets/EP.png"}
+                width={1000}
+                height={1000}
+                alt="Logo"
+                className="w-16 -rotate-90"
             />
-            <p className="-translate-y-6 -translate-x-6 flex">@ <Link href={'https://easyportfolioo.netlify.app'} className="hover:text-blue-600">easyportfolioo.netlify.app</Link></p>
+            <span className=" text-[18px] font-bold purple-gradient-text italic sm:flex">
+                Easy Portfolio
+            </span>
           </div>
-          <p className="translate-x-6 -translate-y-5"> #Build Your  <span className="purple-gradient-text">Portfolio</span> in Minutes</p> 
+          <p className="translate-x-3"> #Build Your Portfolio in Minutes</p> 
         </div>
 
         <div className="flex flex-col lg:flex-row border-t border-gray-500 lg:items-center justify-between ml-6">

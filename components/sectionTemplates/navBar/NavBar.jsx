@@ -11,7 +11,7 @@ const NavBar = ({ template_metadata, section_id, links }) => {
   
   return (
     <>
-      <div className="w-full pt-4 pb-2 border-b border-gray-200 sticky top-0 z-40 bg-white">
+      <div className="w-full pt-4 pb-2 sticky top-0 z-40 bg-white">
         <div className="flex w-[98%] m-auto justify-between items-center">
           <div className="text-white text-lg p-3 font-bold flex items-center gap-2">
             <span className="text-gray-800">{title}</span>

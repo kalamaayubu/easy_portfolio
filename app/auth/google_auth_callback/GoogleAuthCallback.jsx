@@ -1,6 +1,6 @@
 'use client';
 
-import { Settings } from "lucide-react";
+import { Loader2, Settings } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -36,27 +36,25 @@ const GoogleAuthCallback = ({ fromTemplate }) => {
   }, [code, router]);
 
   return (
-    <div className="relative">
-      <div className="fixed inset-0 bg-black opacity-80 backdrop:blur-3xl flex items-center justify-center">
-        <div className="bg-white p-6 rounded-lg flex flex-col">
-          <Settings
-            className="size-14 m-auto text-gray-800"
-            style={{ animation: "spin 2.5s linear infinite" }}
-          />
-          <p className="text-center">We are redirecting you to your dashboard.</p>
-          {redirectUrl && (
-            <p>
-            If this takes too long, click&nbsp;
-            <Link
-              href={redirectUrl}
-              className="text-blue-600 hover:underline"
-            >
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-white rounded-xl p-6 max-w-sm w-full shadow-xl text-center space-y-4">
+        <Loader2 className="m-auto animate-spin text-purple-600" size={40} />
+        <h2 className="text-lg font-semibold text-gray-800">
+          Loging you in...
+        </h2>
+        <p className="text-sm text-gray-500">
+          Just a moment while we complete your authentication.
+        </p>
+
+        {redirectUrl && (
+          <p className="text-sm">
+            If it takes too long, click&nbsp;
+            <Link href={redirectUrl} className="text-blue-600 underline">
               here
             </Link>{" "}
-            to navigate manually.
+            to continue manually.
           </p>
-          )}
-        </div>
+        )}
       </div>
     </div>
   );

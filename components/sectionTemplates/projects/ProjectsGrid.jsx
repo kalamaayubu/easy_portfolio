@@ -3,7 +3,7 @@ import ProjectCard from "./projectCard/ProjectCard";
 const ProjectsGrid = ({ items, heading }) => {
   console.log(`Projects: ${items}`)
   return (
-    <section className="bg-gray-200 pt-10 pb-20">
+    <section id="projects" className="bg-gray-200 pt-10 pb-20">
       <h1 className="text-4xl md:text-5xl text-center mb-10 text-gray-800">
         {heading || "My Projects"}
       </h1>

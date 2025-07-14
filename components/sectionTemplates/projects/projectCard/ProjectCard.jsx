@@ -16,7 +16,7 @@ const ProjectCard = ({ title, description, image, link }) => {
           alt={title}
           width={400}
           height={200}
-          className="w-full h-60 object-cover rounded-md mb-3"
+          className="w-full h-60 object-cover rounded-lg mb-3"
         />
       )}
       <h2 className="text-xl font-bold mb-2">{title}</h2>

@@ -17,7 +17,7 @@ const TemplateCard = ({ templateData }) => {
     <div className="rounded-xl group cursor-default flex flex-col max-w-96 relative transition-all duration-300 ease-in-out shadow-md border border-gray-200 hover:shadow-lg">
       <div className="relative overflow-hidden rounded-t-xl group-hover:p-3 group-hover:pb-0 transition-all duration-500 ease-in-out">
         <Image
-          src={"/assets/templatesScreenshorts/me.jpg"}
+          src={"/assets/trials/image1.jpeg"}
           width={1000}
           height={1000}
           alt="CardImage"

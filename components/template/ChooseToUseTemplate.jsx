@@ -51,7 +51,7 @@ const ChooseToUseTemplate = ({ templateId }) => {
 
   return (
     <>
-      <div className="fixed size-10 sm:size-11 lg:size-12 bg-black top-24 z-40 left-2 shadow-lg shadow-gray-800 bg-opacity-80 backdrop:blur-3xl lg:left-4 rounded-full flex items-center justify-center text-white hover:bg-opacity-100">
+      <div className="fixed size-10 sm:size-11 lg:size-12 animate-pulse hover:animate-none bg-black top-24 z-40 left-2 shadow-lg shadow-gray-800 bg-opacity-80 backdrop:blur-3xl lg:left-4 rounded-full flex items-center justify-center text-white hover:bg-opacity-100">
         <MoreVertical onClick={handleMoreHorizontal} className="scale-90 active:scale-75 hover:cursor-pointer transition-all duration-300"/>
       </div>
 

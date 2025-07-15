@@ -33,9 +33,9 @@ const TemplateCard = ({ templateData }) => {
         </p>
         <button
           onClick={handleSeeDetails}
-          className="max-w-24 p-0 ml-4 hover:translate-x-1 transition-all duration-300 group/button rounded-b-xl bg-white hover:animate-pulse flex items-center justify-between"
+          className="max-w-24 p-0 ml-4 mb-[6px] hover:translate-x-1 transition-all duration-300 group/button rounded-b-xl bg-white hover:animate-pulse flex items-center justify-between"
         >
-          <span className="text-sm purple-gradient-text">See details</span>
+          <span className="font-semibold purple-gradient-text">See details</span>
           <Image
             src="/assets/icons/ChevronRight.svg"
             width={20}

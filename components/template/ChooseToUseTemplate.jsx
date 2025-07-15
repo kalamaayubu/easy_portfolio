@@ -79,7 +79,7 @@ const ChooseToUseTemplate = ({ templateId }) => {
               <button onClick={handleUseTemplate} className="py-3">Use this template</button>
               <button onClick={handleLeaveFeedback} className="py-3">Leave a feedback</button>
               <button className="py-3"><Link href={`/templates`}>Choose another template</Link></button>
-              <p className="">I just want to see my home again please... <Link href={'/'} className="text-blue-700 hover:underline hover:text-blue-600">Go home.</Link></p>
+              <p className="">or do you want to go home? <Link href={'/'} className="text-blue-700 hover:underline hover:text-blue-600">Go home.</Link></p>
             </div>
           </div>
         </div>
@@ -90,11 +90,11 @@ const ChooseToUseTemplate = ({ templateId }) => {
        {isLoginModalOpen && (
         <div className="fixed z-50 inset-0 bg-black bg-opacity-80 backdrop:blur-lg flex items-center justify-center">
           <div className="bg-white rounded-lg shadow-lg max-w-sm w-full p-6">
-            <h2 className="text-xl font-semibold">Hold on! One quick step before continuing.</h2>
+            <h2 className="text-xl font-semibold">One step before continuing.</h2>
             <p className="text-[15px] text-gray-600 mt-2">
               Please log in to use this template.
-              <br />
-              It's all free 😂.
+              <br/>
+              It's a one click login.
             </p>
             <div className="flex justify-end gap-2 mt-4">
               <button onClick={() => setIsLoginModalOpen(false)} className="text-gray-500">Cancel</button>

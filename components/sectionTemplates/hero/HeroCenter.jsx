@@ -9,10 +9,12 @@ const HeroCenter = ({ heading, call_to_action1, call_to_action2, description, im
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
-        height: "90vh",
+        height: "82vh",
       }}
     >
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-gray-500 backdrop:blur-2xl to-transparent z-0"></div>
+
+       {/* Semi-transparent overlay */}
+       <div className="absolute inset-0 bg-gray-300 bg-opacity-80 z-0"/>
 
       <div className="translate-y-32 flex flex-col items-center m-auto text-center w-full max-w-[800px] px-10 z-10">
         <h1 className="text-center text-4xl sm:text-5xl md:text-6xl">

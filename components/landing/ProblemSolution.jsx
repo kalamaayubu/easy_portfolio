@@ -4,15 +4,30 @@ import { CloudLightningIcon, GraduationCap, Share2Icon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import CreatePortfolioBtn from "../CreatePortfolioBtn";
+import { useLayoutEffect } from "react";
+import gsap from "gsap";
+import { fadeInFromLeft, fadeInFromRight } from "@/utils/animations/gsap";
 
 const ProblemSolution = () => {
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      fadeInFromLeft(".problem-text", ".problem-section");
+      fadeInFromRight(".problem-image", ".problem-section");
+
+      fadeInFromLeft(".solution-video", ".solution-section");
+      fadeInFromRight(".solution-text", ".solution-section");
+    });
+
+    return () => ctx.revert()
+  }, []);
+
   return (
      <section id="problem-solution"  className="flex flex-col w-[85%] m-auto">
       <p className="section-header">PROBLEM / SOLUTION</p>
       <div className="mb-8">
         <div className="flex flex-col">
-          <div className="hidden gap-8 xl:gap-12 items-center w-[95%] max-w-[1200px] justify-between m-auto lg:flex">
-            <div className="flex flex-col ml-8">
+          <div className="problem-section hidden gap-8 xl:gap-12 items-center w-[95%] max-w-[1200px] justify-between m-auto lg:flex">
+            <div className="problem-text flex flex-col ml-8">
               <h1 className="text-[30px] sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">Why Does Sharing Your Work Feel Like Work</h1>
               <p className="text-gray-500 text-xl mb-4 w-[95%] lg:w-full max-w-[500px] xl:max-w-[550px]">
                 You’ve built projects—but showcasing them? That’s a whole different story. 
@@ -22,7 +37,7 @@ const ProblemSolution = () => {
               </p>
               <CreatePortfolioBtn/>
             </div>
-            <div className="">
+            <div className="problem-image">
               <Image
               src="/assets/trials/stress.gif"
               width={1000}
@@ -58,10 +73,10 @@ const ProblemSolution = () => {
       </div>
 
       {/* The solution section */}
-      <div className="flex flex-col m-auto gap-6 lg:flex-row lg:w-full lg:justify-between lg:m-auto lg:gap-8 xl:gap-12 mt-10 lg:mt-14">
+      <div className="solution-section flex flex-col m-auto gap-6 lg:flex-row lg:w-full lg:justify-between lg:m-auto lg:gap-8 xl:gap-12 mt-10 lg:mt-14">
           <h1 className="text-[30px] lg:hidden text-center m-auto sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">Showcase Your Work, Without the Struggle</h1>
           {/* Video presentation */}
-            <div className="relative w-[85%] border-[10px] bg-gray-900 border-black max-w-[450px] rounded-3xl m-auto overflow-hidden rounded-b-none border-b-0">
+            <div className="solution-video relative w-[85%] border-[10px] bg-gray-900 border-black max-w-[450px] rounded-3xl m-auto overflow-hidden rounded-b-none border-b-0">
               <video
                 src="/assets/videos/solutionVid.mp4" // ✅ your actual video path
                 autoPlay
@@ -78,7 +93,7 @@ const ProblemSolution = () => {
               </div>
             </div>
 
-          <div className="flex flex-col">
+          <div className="solution-text flex flex-col">
               <h1 className="text-[30px] hidden lg:flex sm:text-3xl md:text-4xl xl:text-5xl max-w-[500px] xl:max-w-[640px] mb-4">Showcase Your Work, Without the Struggle</h1>
             <p className="text-gray-500 text-xl m-auto lg:m-0 text-center lg:text-start max-w-[500px] xl:max-w-[550px] px-2">
               <span className="font-bold">Easyportfolioo</span> removes all that friction. It’s a platform designed specifically for individuals who just want to:
